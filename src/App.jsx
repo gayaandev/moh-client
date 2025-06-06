@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './components/public/pages/HomePage';
 import DashboardPage from './components/admin/pages/DashboardPage';
+import SiteSettingsPage from './components/admin/pages/SiteSettingsPage';
 import LoginPage from './components/admin/pages/LoginPage'; // Import LoginPage
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext'; // Import AuthProvider and useAuth
@@ -37,13 +38,21 @@ function App() {
             <Route path="/admin/login" element={<LoginPage />} />
 
             {/* Protected Admin Routes */}
-            <Route 
-              path="/admin" 
+            <Route
+              path="/admin"
               element={
                 <ProtectedRoute allowedRoles={['superadmin', 'editor']}>
                   <DashboardPage />
                 </ProtectedRoute>
-              } 
+              }
+            />
+            <Route
+              path="/admin/site-settings"
+              element={
+                <ProtectedRoute allowedRoles={['superadmin', 'editor']}>
+                  <SiteSettingsPage />
+                </ProtectedRoute>
+              }
             />
             {/* Add other protected admin routes here */}
           </Routes>

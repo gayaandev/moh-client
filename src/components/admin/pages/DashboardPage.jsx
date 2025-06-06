@@ -5,7 +5,7 @@ import WebsiteTrafficChart from '../components/WebsiteTrafficChart';
 import TrafficSourcesChart from '../components/TrafficSourcesChart';
 import RecentNews from '../components/RecentNews';
 import RecentEvents from '../components/RecentEvents';
-import { Users, Newspaper, Folder, Calendar } from 'lucide-react';
+import { Users, Newspaper, Folder, Calendar, Mail, Phone, Facebook, Twitter, Linkedin } from 'lucide-react';
 
 const DashboardPage = () => {
   return (

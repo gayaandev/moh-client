@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext'; // Import useAuth
 import mohLogo from '../../../assets/moh-logo.png'; // Import the logo
 import {
@@ -25,7 +25,11 @@ const AdminLayout = ({ children }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user, logout } = useAuth(); // Get user and logout function from AuthContext
   const navigate = useNavigate();
-  
+  const location = useLocation(); // Get current location
+
+  // Determine if the admin dropdown should be open
+  const isAdminDropdownOpen = ['/admin/site-settings'].some(path => location.pathname.startsWith(path));
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -55,7 +59,7 @@ const AdminLayout = ({ children }) => {
                 </Link>
               </li>
               <li>
-                <details className="group">
+                <details className="group" open={isAdminDropdownOpen}>
                   <summary className="flex items-center p-3 rounded-md text-[#99A1AF] hover:bg-[#252b3b] hover:text-white transition-colors duration-200 cursor-pointer">
                     <Settings className="mr-3" size={18} />
                     <span>Admin</span>
@@ -63,10 +67,10 @@ const AdminLayout = ({ children }) => {
                   </summary>
                   <ul className="ml-6 mt-2 space-y-1">
                     <li>
-                      <a href="#" className="flex items-center p-2 rounded-md text-[#99A1AF] hover:bg-[#252b3b] hover:text-white transition-colors duration-200">
+                      <Link to="/admin/site-settings" className="flex items-center p-2 rounded-md text-[#99A1AF] hover:bg-[#252b3b] hover:text-white transition-colors duration-200">
                         <Globe className="mr-3" size={16} />
                         <span>Site</span>
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <a href="#" className="flex items-center p-2 rounded-md text-[#99A1AF] hover:bg-[#252b3b] hover:text-white transition-colors duration-200">
@@ -145,7 +149,7 @@ const AdminLayout = ({ children }) => {
         {/* Header */}
         <header className="flex items-center justify-between p-4 bg-white border-b border-gray-200 shadow-sm">
           <div className="text-xl text-gray-800">
-            <span className="font-semibold">Home</span> <span className="text-gray-400">/</span> <span className="font-normal">Dashboard</span>
+            <span className="font-semibold">Home</span> <span className="text-gray-400">/</span> <span className="font-normal">{location.pathname.split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}</span>
           </div>
           <div className="flex items-center space-x-4">
             <div className="relative">
