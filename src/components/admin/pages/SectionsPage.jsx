@@ -3,6 +3,7 @@ import AdminLayout from '../components/AdminLayout';
 import axios from 'axios';
 import { BASE_URL, GET_SECTION_BY_NAME_URL, CREATE_SECTION_URL, UPDATE_SECTION_URL } from '../../../services/apis';
 import { FileText, Heading1, Type, Tag, Edit3, Layers, Link as LinkIcon, Image as ImageIcon, MousePointerClick } from 'lucide-react'; // Added new icons
+import toast, { Toaster } from 'react-hot-toast'; // Import react-hot-toast
 
 const SectionsPage = () => {
   const [sectionData, setSectionData] = useState(null);
@@ -90,6 +91,7 @@ const SectionsPage = () => {
         } else {
           console.error("fetchSectionData - response.data is null or undefined, but not the 'not found' case.");
           setError('Failed to fetch section data: Invalid data structure received.');
+          toast.error('Failed to fetch section data: Invalid data structure received.'); // Added toast
           setIsNewSection(true); // Treat as new if data is unusable
           setSectionData({
             section_type: "", section_name: "", category: "", header: "Error: Default Header", subheader: "Error: Default Subheader",
@@ -115,6 +117,7 @@ const SectionsPage = () => {
             });
         } else {
             setError('Failed to fetch section data. Check console for details.');
+            toast.error('Failed to fetch section data. Check console for details.'); // Added toast
             console.error('Detailed error fetching section data:', err.response ? err.response.data : err.message, err);
         }
       } finally {
@@ -257,16 +260,18 @@ const SectionsPage = () => {
     try {
       if (isNewSection) {
         console.log("handleSubmit - Attempting to POST to:", CREATE_SECTION_URL);
-        await axios.post(CREATE_SECTION_URL, payload, {
+        const postResponse = await axios.post(CREATE_SECTION_URL, payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        alert('Section data added successfully!');
+        console.log("handleSubmit - POST response:", postResponse.data);
+        toast.success('Section data added successfully!');
       } else {
         console.log("handleSubmit - Attempting to PUT to:", UPDATE_SECTION_URL(sectionData._id));
-        await axios.put(UPDATE_SECTION_URL(sectionData._id), payload, {
+        const putResponse = await axios.put(UPDATE_SECTION_URL(sectionData._id), payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        alert('Section data updated successfully!');
+        console.log("handleSubmit - PUT response:", putResponse.data);
+        toast.success('Section data updated successfully!');
       }
       // Re-fetch data using the potentially updated section_name
       const response = await axios.get(GET_SECTION_BY_NAME_URL(sectionData.section_name), {
@@ -305,8 +310,8 @@ const SectionsPage = () => {
       setSectionData(normalizedAfterSave);
       setIsNewSection(false);
     } catch (err) {
-      setError('Failed to save section data. Check console for details.');
-      console.error('Error saving section data:', err.response ? err.response.data : err.message, err);
+      console.error('handleSubmit - Error saving section data:', err.response ? err.response.data : err.message, err);
+      toast.error('Failed to save section data. Check console for details.');
     } finally {
       setLoading(false);
     }
@@ -547,6 +552,7 @@ const SectionsPage = () => {
           </div>
         </form>
       </div>
+      <Toaster /> {/* Add Toaster component here */}
     </AdminLayout>
   );
 };
