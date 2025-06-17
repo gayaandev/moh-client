@@ -1,4 +1,4 @@
-const BASE_URL = 'https://moh.sahansoft.com/api';
+export const BASE_URL = 'https://moh.sahansoft.com/api';
 
 // Authentication Endpoints
 export const REGISTER_SUPERADMIN_URL = `${BASE_URL}/auth/register-superadmin`; // Register Super Admin
@@ -26,6 +26,7 @@ export const GET_ALL_SECTIONS_URL = `${BASE_URL}/sections`; // Get All Sections
 export const GET_SINGLE_SECTION_URL = (id) => `${BASE_URL}/sections/${id}`; // Get Single Section
 export const UPDATE_SECTION_URL = (id) => `${BASE_URL}/sections/${id}`; // Update Section
 export const DELETE_SECTION_URL = (id) => `${BASE_URL}/sections/${id}`; // Delete Section
+export const GET_SECTION_BY_NAME_URL = (name) => `${BASE_URL}/sections?name=${name}`; // Get Section by Name
 
 // Upload Endpoints
 export const UPLOAD_IMAGES_URL = `${BASE_URL}/upload-images`; // Upload Images
