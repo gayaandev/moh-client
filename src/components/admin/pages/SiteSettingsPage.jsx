@@ -50,35 +50,27 @@ const SiteSettingsPage = () => {
     };
 
     try {
-      console.log("handleSubmit - isNewSiteInfo:", isNewSiteInfo);
-      console.log("handleSubmit - payload:", JSON.stringify(payload, null, 2));
       if (isNewSiteInfo) {
-        console.log("handleSubmit - Attempting to POST to:", CREATE_SECTION_URL);
         const postResponse = await axios.post(CREATE_SECTION_URL, payload, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log("handleSubmit - POST response:", postResponse);
         alert('Site information added successfully!');
       } else {
-        console.log("handleSubmit - Attempting to PUT to:", UPDATE_SECTION_URL(siteInfo._id));
         const putResponse = await axios.put(UPDATE_SECTION_URL(siteInfo._id), payload, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log("handleSubmit - PUT response:", putResponse);
         alert('Site information updated successfully!');
       }
       // Re-fetch data to ensure UI is up-to-date
-      console.log("handleSubmit - Attempting to GET from:", GET_SECTION_BY_NAME_URL('siteinfo'));
       const response = await axios.get(GET_SECTION_BY_NAME_URL('siteinfo'), {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("handleSubmit - GET response after save:", response);
       setSiteInfo(response.data);
       setIsNewSiteInfo(false);
     } catch (err) {
@@ -100,18 +92,14 @@ const SiteSettingsPage = () => {
       }
 
       try {
-        console.log("fetchSiteInfo - Attempting to GET from:", GET_SECTION_BY_NAME_URL('siteinfo'));
         const response = await axios.get(GET_SECTION_BY_NAME_URL('siteinfo'), {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log("fetchSiteInfo - Raw response from GET:", response);
-        console.log("fetchSiteInfo - Raw response.data from GET:", JSON.stringify(response.data, null, 2));
 
         // Check if the backend indicates "not found"
         if (response.data && response.data.found === false && response.data.message === 'Section not found') {
-          console.log("fetchSiteInfo - Section not found, setting isNewSiteInfo to true and initializing siteInfo.");
           setIsNewSiteInfo(true);
           setSiteInfo({
             section_type: "siteinfo",
@@ -125,9 +113,7 @@ const SiteSettingsPage = () => {
             },
           });
         } else if (response.data) { // Data IS found
-          console.log("fetchSiteInfo - Data found, processing...");
           const data = JSON.parse(JSON.stringify(response.data)); // Deep clone to avoid modifying original response object
-          console.log("fetchSiteInfo - Fetched data (cloned):", JSON.stringify(data, null, 2));
 
           // Ensure columns and column1 exist
           if (!data.columns) data.columns = {};
@@ -137,7 +123,6 @@ const SiteSettingsPage = () => {
           
           // Ensure content in column1 is an object for the form, even if backend stores it as string
           if (typeof data.columns.column1.content !== 'object') {
-            console.log("fetchSiteInfo - Converting column1.content from string to object for form state.");
             // If content was a string (e.g., ""), initialize email/phone.
             // If it was a string with actual content, that content is not directly mapped to email/phone here.
             data.columns.column1.content = { email: '', phone: '' };
@@ -156,12 +141,10 @@ const SiteSettingsPage = () => {
           if (!data.columns.column2) data.columns.column2 = { content: '', links: [], images: [], buttons: [] };
           if (!data.columns.column3) data.columns.column3 = { content: '', links: [], images: [], buttons: [] };
           
-          console.log("fetchSiteInfo - Data after normalization:", JSON.stringify(data, null, 2));
           setSiteInfo(data);
           setIsNewSiteInfo(false);
         } else {
           // Handle cases where response.data might be null or undefined unexpectedly
-          console.error("fetchSiteInfo - response.data is null or undefined, but not the 'not found' case.");
           setError('Failed to fetch site information: Invalid data structure received.');
            setSiteInfo({ // Fallback to a new structure
             section_type: "siteinfo", section_name: "siteinfo", header: "Site Information", subheader: "Contact and Social Media Details",
@@ -172,10 +155,8 @@ const SiteSettingsPage = () => {
           setIsNewSiteInfo(true); // Treat as new if data is unusable
         }
       } catch (err) {
-        console.error("fetchSiteInfo - Error during fetch or processing:", err);
         // Check if the error is the specific "not found" message from the backend, even if it's an error status
         if (err.response && err.response.data && err.response.data.message === 'Section not found') {
-            console.log("fetchSiteInfo - Caught error, but it's a 'Section not found' (e.g. 404), setting isNewSiteInfo to true");
             setIsNewSiteInfo(true);
             setSiteInfo({
                 section_type: "siteinfo", section_name: "siteinfo", header: "Site Information", subheader: "Contact and Social Media Details",
@@ -195,7 +176,6 @@ const SiteSettingsPage = () => {
     fetchSiteInfo();
   }, []);
 
-  console.log('SiteSettingsPage - Loading:', loading, 'Error:', error, 'SiteInfo:', siteInfo);
 
   if (loading) {
     return (

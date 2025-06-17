@@ -30,14 +30,11 @@ const SectionsPage = () => {
       }
 
       try {
-        console.log(`fetchSectionData - Attempting to GET from: ${GET_SECTION_BY_NAME_URL(initialSectionNameToLoad)}`);
         const response = await axios.get(GET_SECTION_BY_NAME_URL(initialSectionNameToLoad), {
           headers: { Authorization: `Bearer ${token}` },
         });
-        console.log("fetchSectionData - Raw response from GET:", response);
-
+        
         if (response.data && response.data.found === false && response.data.message === 'Section not found') {
-          console.log("fetchSectionData - Section not found, setting isNewSection to true and initializing sectionData.");
           setIsNewSection(true);
           setSectionData({
             section_type: "", // Required, user must fill
@@ -52,7 +49,6 @@ const SectionsPage = () => {
             },
           });
         } else if (response.data) {
-          console.log("fetchSectionData - Data found, processing...");
           const data = JSON.parse(JSON.stringify(response.data)); // Deep clone
 
           // Normalize fetched data
@@ -85,11 +81,9 @@ const SectionsPage = () => {
             }
           };
           
-          console.log("fetchSectionData - Data after normalization:", JSON.stringify(normalizedData, null, 2));
           setSectionData(normalizedData);
           setIsNewSection(false);
         } else {
-          console.error("fetchSectionData - response.data is null or undefined, but not the 'not found' case.");
           setError('Failed to fetch section data: Invalid data structure received.');
           toast.error('Failed to fetch section data: Invalid data structure received.'); // Added toast
           setIsNewSection(true); // Treat as new if data is unusable
@@ -103,9 +97,7 @@ const SectionsPage = () => {
           });
         }
       } catch (err) {
-        console.error("fetchSectionData - Error during fetch or processing:", err);
         if (err.response && err.response.data && err.response.data.message === 'Section not found') {
-            console.log("fetchSectionData - Caught error, but it's a 'Section not found', setting isNewSection to true");
             setIsNewSection(true);
             setSectionData({
                 section_type: "", section_name: "", category: "", header: "New Section Header", subheader: "New Section Subheader",
@@ -255,22 +247,17 @@ const SectionsPage = () => {
         },
       },
     };
-    console.log("handleSubmit - payload:", JSON.stringify(payload, null, 2));
 
     try {
       if (isNewSection) {
-        console.log("handleSubmit - Attempting to POST to:", CREATE_SECTION_URL);
         const postResponse = await axios.post(CREATE_SECTION_URL, payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        console.log("handleSubmit - POST response:", postResponse.data);
         toast.success('Section data added successfully!');
       } else {
-        console.log("handleSubmit - Attempting to PUT to:", UPDATE_SECTION_URL(sectionData._id));
         const putResponse = await axios.put(UPDATE_SECTION_URL(sectionData._id), payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        console.log("handleSubmit - PUT response:", putResponse.data);
         toast.success('Section data updated successfully!');
       }
       // Re-fetch data using the potentially updated section_name
@@ -310,7 +297,6 @@ const SectionsPage = () => {
       setSectionData(normalizedAfterSave);
       setIsNewSection(false);
     } catch (err) {
-      console.error('handleSubmit - Error saving section data:', err.response ? err.response.data : err.message, err);
       toast.error('Failed to save section data. Check console for details.');
     } finally {
       setLoading(false);
