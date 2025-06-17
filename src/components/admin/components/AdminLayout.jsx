@@ -28,7 +28,7 @@ const AdminLayout = ({ children }) => {
   const location = useLocation(); // Get current location
 
   // Determine if the admin dropdown should be open
-  const isAdminDropdownOpen = ['/admin/site-settings'].some(path => location.pathname.startsWith(path));
+  const isAdminDropdownOpen = ['/admin/site-settings', '/admin/sections'].some(path => location.pathname.startsWith(path));
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -79,10 +79,10 @@ const AdminLayout = ({ children }) => {
                       </a>
                     </li>
                     <li>
-                      <a href="#" className="flex items-center p-2 rounded-md text-[#99A1AF] hover:bg-[#252b3b] hover:text-white transition-colors duration-200">
+                      <Link to="/admin/sections" className="flex items-center p-2 rounded-md text-[#99A1AF] hover:bg-[#252b3b] hover:text-white transition-colors duration-200">
                         <LayoutGrid className="mr-3" size={16} />
                         <span>Sections</span>
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <a href="#" className="flex items-center p-2 rounded-md text-[#99A1AF] hover:bg-[#252b3b] hover:text-white transition-colors duration-200">
