@@ -110,7 +110,6 @@ const SectionsPage = () => {
         } else {
             setError('Failed to fetch section data. Check console for details.');
             toast.error('Failed to fetch section data. Check console for details.'); // Added toast
-            console.error('Detailed error fetching section data:', err.response ? err.response.data : err.message, err);
         }
       } finally {
         setLoading(false);
