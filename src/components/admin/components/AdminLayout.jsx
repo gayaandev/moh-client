@@ -20,8 +20,9 @@ import {
   Users, // For User (already imported, but good to be explicit)
   LogOut // For Logout
 } from 'lucide-react';
+import { Toaster } from 'react-hot-toast'; // Import Toaster
 
-const AdminLayout = ({ children }) => {
+const AdminLayout = ({ children, modal }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user, logout } = useAuth(); // Get user and logout function from AuthContext
   const navigate = useNavigate();
@@ -79,7 +80,7 @@ const AdminLayout = ({ children }) => {
                       </a>
                     </li>
                     <li>
-                      <Link to="/admin/sections" className="flex items-center p-2 rounded-md text-[#99A1AF] hover:bg-[#252b3b] hover:text-white transition-colors duration-200">
+                      <Link to="/admin/all-sections" className="flex items-center p-2 rounded-md text-[#99A1AF] hover:bg-[#252b3b] hover:text-white transition-colors duration-200">
                         <LayoutGrid className="mr-3" size={16} />
                         <span>Sections</span>
                       </Link>
@@ -185,6 +186,8 @@ const AdminLayout = ({ children }) => {
           {children}
         </main>
       </div>
+      {modal} {/* Render the modal here, outside the main content area */}
+      <Toaster /> {/* Add Toaster component here */}
     </div>
   );
 };

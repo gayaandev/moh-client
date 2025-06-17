@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import HomePage from './components/public/pages/HomePage';
 import DashboardPage from './components/admin/pages/DashboardPage';
 import SiteSettingsPage from './components/admin/pages/SiteSettingsPage';
-import SectionsPage from './components/admin/pages/SectionsPage'; // Import SectionsPage
+import SectionsPage from './components/admin/pages/SectionsPage';
+import AllSectionsPage from './components/admin/pages/AllSectionsPage'; // Import AllSectionsPage
 import LoginPage from './components/admin/pages/LoginPage'; // Import LoginPage
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext'; // Import AuthProvider and useAuth
@@ -59,7 +60,7 @@ function App() {
               path="/admin/sections"
               element={
                 <ProtectedRoute allowedRoles={['superadmin', 'editor']}>
-                  <SectionsPage />
+                  <AllSectionsPage />
                 </ProtectedRoute>
               }
             />
