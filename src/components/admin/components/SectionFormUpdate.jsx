@@ -1,25 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { CREATE_SECTION_URL, UPDATE_SECTION_URL } from '../../../services/apis';
+import { CREATE_SECTION_URL, UPDATE_SECTION_URL, GET_SINGLE_SECTION_URL } from '../../../services/apis'; // Removed GET_SECTION_BY_NAME_URL
 import { FileText, Heading1, Type, Tag, Edit3, Layers, Link as LinkIcon, Image as ImageIcon, MousePointerClick } from 'lucide-react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
-const SectionForm = ({ onClose }) => { // Add onClose prop
-  const [sectionData, setSectionData] = useState({
-    section_type: "", // Required, user must fill
-    section_name: "", // Required, user must fill for new
-    category: "",
-    header: "Default Section Header",
-    subheader: "Default Section Subheader",
-    columns: {
-      column1: { content: "", links: [], images: [], buttons: [] },
-      column2: { content: "", links: [], images: [], buttons: [] },
-      column3: { content: "", links: [], images: [], buttons: [] },
-    },
-  });
-  const [loading, setLoading] = useState(false); // No initial loading for fetch
+const SectionFormUpdate = ({ sectionId, onClose }) => { // Accept sectionId and onClose prop
+  const [sectionData, setSectionData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isNewSection, setIsNewSection] = useState(true); // Always true for this component
+  const [isNewSection, setIsNewSection] = useState(false); // True if creating new, false if editing existing
 
   // State for new link inputs (generic for any column)
   const [newLinkInputs, setNewLinkInputs] = useState({
@@ -28,10 +17,92 @@ const SectionForm = ({ onClose }) => { // Add onClose prop
     column3: { title: '', url: '' },
   });
 
+  useEffect(() => {
+    const fetchSectionData = async () => {
+      setLoading(true);
+      setError(null);
+      const token = sessionStorage.getItem('token');
+      if (!token) {
+        setError('Authentication token not found. Please log in.');
+        setLoading(false);
+        return;
+      }
+
+      if (!sectionId) { // If no sectionId, it's an error for update form
+        setError('Section ID is required for updating.');
+        setLoading(false);
+        return;
+      }
+
+      // If sectionId is provided, fetch existing section data
+      try {
+        const response = await axios.get(GET_SINGLE_SECTION_URL(sectionId), {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        
+        if (response.data) {
+          const data = JSON.parse(JSON.stringify(response.data)); // Deep clone
+
+          // Normalize fetched data
+          const normalizedData = {
+            _id: data._id,
+            section_type: data.section_type || "",
+            section_name: data.section_name || "",
+            category: data.category || "",
+            header: data.header || "",
+            subheader: data.subheader || "",
+            columns: {
+              column1: {
+                content: data.columns?.column1?.content || "",
+                links: Array.isArray(data.columns?.column1?.links) ? data.columns.column1.links : [],
+                images: Array.isArray(data.columns?.column1?.images) ? data.columns.column1.images : [],
+                buttons: Array.isArray(data.columns?.column1?.buttons) ? data.columns.column1.buttons : []
+              },
+              column2: {
+                content: data.columns?.column2?.content || "",
+                links: Array.isArray(data.columns?.column2?.links) ? data.columns.column2.links : [],
+                images: Array.isArray(data.columns?.column2?.images) ? data.columns.column2.images : [],
+                buttons: Array.isArray(data.columns?.column2?.buttons) ? data.columns.column2.buttons : []
+              },
+              column3: {
+                content: data.columns?.column3?.content || "",
+                links: Array.isArray(data.columns?.column3?.links) ? data.columns.column3.links : [],
+                images: Array.isArray(data.columns?.column3?.images) ? data.columns.column3.images : [],
+                buttons: Array.isArray(data.columns?.column3?.buttons) ? data.columns.column3.buttons : []
+              },
+            }
+          };
+          
+          setSectionData(normalizedData);
+          setIsNewSection(false); // It's an existing section
+        } else {
+          setError('Failed to fetch section data: Invalid data structure received.');
+          toast.error('Failed to fetch section data: Invalid data structure received.');
+          setSectionData(null); // Ensure sectionData is null if data is unusable
+        }
+      } catch (err) {
+        setError('Failed to fetch section data. Check console for details.');
+        toast.error('Failed to fetch section data. Check console for details.');
+        setSectionData(null); // Ensure sectionData is null on error
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSectionData();
+  }, [sectionId]); // Re-run effect when sectionId changes
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setSectionData(prev => {
-      const newData = JSON.parse(JSON.stringify(prev));
+      const newData = JSON.parse(JSON.stringify(prev || {
+        section_type: "", section_name: "", category: "", header: "", subheader: "",
+        columns: {
+          column1: { content: "", links: [], images: [], buttons: [] },
+          column2: { content: "", links: [], images: [], buttons: [] },
+          column3: { content: "", links: [], images: [], buttons: [] },
+        }
+      }));
 
       if (name === "section_type") newData.section_type = value;
       else if (name === "section_name") newData.section_name = value;
@@ -98,13 +169,6 @@ const SectionForm = ({ onClose }) => { // Add onClose prop
     setLoading(true);
     setError(null);
 
-    // Ensure sectionData is not null before proceeding
-    if (!sectionData) {
-      setError("Section data is not initialized.");
-      setLoading(false);
-      return;
-    }
-
     const token = sessionStorage.getItem('token');
     if (!token) {
       setError('Authentication token not found. Please log in.');
@@ -154,32 +218,50 @@ const SectionForm = ({ onClose }) => { // Add onClose prop
     };
 
     try {
-      if (isNewSection) {
-        await axios.post(CREATE_SECTION_URL, payload, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        toast.success('Section data added successfully!');
-        onClose(); // Close modal on success
-      } else {
-        // This branch should ideally not be reached if isNewSection is always true
-        // But keeping it for robustness if the component's usage changes
-        await axios.put(UPDATE_SECTION_URL(sectionData._id), payload, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        toast.success('Section data updated successfully!');
-        onClose(); // Close modal on success
+      // Always update for SectionFormUpdate
+      await axios.put(UPDATE_SECTION_URL(sectionData._id), payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      toast.success('Section data updated successfully!');
+      
+      // Close the modal after successful submission
+      if (onClose) {
+        onClose();
       }
     } catch (err) {
       toast.error('Failed to save section data. Check console for details.');
       console.error('Error saving section:', err);
-      setError('Failed to save section data.');
     } finally {
       setLoading(false);
     }
   };
 
-  // No loading or error states for initial fetch, as it's always a new section
-  // The component will always render the form
+  if (loading) {
+    return (
+      <div className="mt-8 p-6 bg-white rounded-lg shadow-md flex justify-center items-center h-64">
+        <svg className="animate-spin h-12 w-12 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+      </div>
+    );
+  }
+
+  if (error) {
+     return (
+      <div className="mt-8 p-6 bg-white rounded-lg shadow-md">
+        <p className="text-red-500">Error: {error}</p>
+      </div>
+    );
+  }
+  
+  if (!sectionData) { // Fallback if still no data after loading/error checks
+    return (
+      <div className="mt-8 p-6 bg-white rounded-lg shadow-md">
+        <p>No section data available. Please try again.</p>
+      </div>
+    );
+  }
 
   const renderColumnFields = (columnName) => (
     <div className="border p-4 rounded-md mb-4">
@@ -385,4 +467,4 @@ const SectionForm = ({ onClose }) => { // Add onClose prop
   );
 };
 
-export default SectionForm;
+export default SectionFormUpdate;

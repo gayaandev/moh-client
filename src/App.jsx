@@ -57,7 +57,7 @@ function App() {
               }
             />
             <Route
-              path="/admin/sections"
+              path="/admin/all-sections"
               element={
                 <ProtectedRoute allowedRoles={['superadmin', 'editor']}>
                   <AllSectionsPage />
