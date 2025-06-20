@@ -2,6 +2,7 @@ export const BASE_URL = 'https://moh.sahansoft.com/api';
 
 // Authentication Endpoints
 export const REGISTER_SUPERADMIN_URL = `${BASE_URL}/auth/register-superadmin`; // Register Super Admin
+export const REGISTER_URL = `${BASE_URL}/auth/register`; // Register User
 export const ADMIN_LOGIN_URL = `${BASE_URL}/auth/login`; // Admin Login
 
 // Menu Endpoints
@@ -30,4 +31,3 @@ export const GET_SECTION_BY_NAME_URL = (name) => `${BASE_URL}/sections?name=${na
 
 // Upload Endpoints
 export const UPLOAD_IMAGES_URL = `${BASE_URL}/upload-images`; // Upload Images
-

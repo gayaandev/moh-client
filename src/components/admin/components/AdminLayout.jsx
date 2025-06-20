@@ -93,10 +93,10 @@ const AdminLayout = ({ children, modal }) => {
                     </li>
                     {isSuperAdmin && ( // Conditionally render based on role
                       <li>
-                        <a href="#" className="flex items-center p-2 rounded-md text-[#99A1AF] hover:bg-[#252b3b] hover:text-white transition-colors duration-200">
+                        <Link to="/admin/users" className="flex items-center p-2 rounded-md text-[#99A1AF] hover:bg-[#252b3b] hover:text-white transition-colors duration-200">
                           <Users className="mr-3" size={16} />
                           <span>Users</span>
-                        </a>
+                        </Link>
                       </li>
                     )}
                   </ul>
