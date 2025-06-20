@@ -18,12 +18,13 @@ export const UPDATE_MENU_ITEM_URL = (id) => `${BASE_URL}/menu/items/${id}`; // U
 export const DELETE_MENU_ITEM_URL = (id) => `${BASE_URL}/menu/items/${id}`; // Delete Menu Item
 
 // Page Endpoints
-export const GET_HOMEPAGE_URL = `${BASE_URL}/pages/homepage`; // Get Homepage Content
-export const GET_PAGE_BY_SLUG_URL = (slug) => `${BASE_URL}/pages/${slug}`; // Get Page by Slug
-export const CREATE_PAGE_URL = `${BASE_URL}/pages`; // Create New Page
-export const GET_ALL_PAGES_URL = `${BASE_URL}/pages`; // Get All Pages
-export const UPDATE_PAGE_URL = (idOrSlug) => `${BASE_URL}/pages/${idOrSlug}`; // Update Page
-export const DELETE_PAGE_URL = (idOrSlug) => `${BASE_URL}/pages/${idOrSlug}`; // Delete Page
+export const GET_HOMEPAGE_URL = `${BASE_URL}/admin/pages/homepage`; // Get Homepage Content
+export const GET_PAGE_BY_SLUG_URL = (slug) => `${BASE_URL}/admin/pages/${slug}`; // Get Page by Slug
+export const CREATE_PAGE_URL = `${BASE_URL}/admin/pages`; // Create New Page
+export const GET_ALL_PAGES_URL = `${BASE_URL}/admin/pages`; // Get All Pages
+export const GET_SINGLE_PAGE_URL = (id) => `${BASE_URL}/admin/pages/${id}`; // Get Single Page
+export const UPDATE_PAGE_URL = (idOrSlug) => `${BASE_URL}/admin/pages/${idOrSlug}`; // Update Page
+export const DELETE_PAGE_URL = (idOrSlug) => `${BASE_URL}/admin/pages/${idOrSlug}`; // Delete Page
 
 // Section Endpoints
 export const CREATE_SECTION_URL = `${BASE_URL}/sections`; // Create New Section

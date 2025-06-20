@@ -6,6 +6,7 @@ import SiteSettingsPage from './components/admin/pages/SiteSettingsPage';
 import SectionsPage from './components/admin/pages/SectionsPage';
 import AllSectionsPage from './components/admin/pages/AllSectionsPage'; // Import AllSectionsPage
 import AllMenuItemsPage from './components/admin/pages/AllMenuItemsPage'; // Import AllMenuItemsPage
+import AllPages from './components/admin/pages/AllPages'; // Import AllPages
 import LoginPage from './components/admin/pages/LoginPage'; // Import LoginPage
 import UsersPage from './components/admin/pages/UsersPage'; // Import UsersPage
 import { ThemeProvider } from './context/ThemeContext';
@@ -71,6 +72,15 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={['superadmin', 'editor']}>
                   <AllMenuItemsPage />
+                </ProtectedRoute>
+              }
+            />
+            {/* All Pages Route */}
+            <Route
+              path="/admin/all-pages"
+              element={
+                <ProtectedRoute allowedRoles={['superadmin', 'editor']}>
+                  <AllPages />
                 </ProtectedRoute>
               }
             />
