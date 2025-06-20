@@ -1,16 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Edit3, Layers, Type, Eye, EyeOff } from 'lucide-react'; // Import icons
-import { REGISTER_URL } from '../../../services/apis'; // Assuming REGISTER_URL is defined in apis.js
+import { REGISTER_URL, GET_SINGLE_USER_URL, UPDATE_USER_URL } from '../../../services/apis'; // Import necessary APIs
 
-const UserForm = ({ onClose }) => {
+const UserForm = ({ onClose, userId }) => { // Accept userId prop
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('editor'); // Default role
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false); // State for password visibility
+
+  // Fetch user data if userId is provided (for editing)
+  useEffect(() => {
+    if (userId) {
+      const fetchUserData = async () => {
+        setLoading(true);
+        setError(null);
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+          setError('Authentication token not found. Please log in.');
+          setLoading(false);
+          return;
+        }
+
+        try {
+          const response = await axios.get(GET_SINGLE_USER_URL(userId), {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const userData = response.data.data.user; // Assuming response structure
+          setUsername(userData.username || '');
+          setRole(userData.role || 'editor');
+          // Password field is typically not pre-filled for security reasons
+        } catch (err) {
+          setError('Failed to fetch user data. Check console for details.');
+          console.error('Error fetching user data:', err);
+          toast.error('Failed to fetch user data.');
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchUserData();
+    }
+  }, [userId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,17 +58,22 @@ const UserForm = ({ onClose }) => {
     }
 
     try {
-      await axios.post(
-        REGISTER_URL,
-        { username, password, role },
+      const url = userId ? UPDATE_USER_URL(userId) : REGISTER_URL;
+      const method = userId ? 'put' : 'post';
+      const successMessage = userId ? 'User updated successfully!' : 'User created successfully!';
+
+      await axios[method](
+        url,
+        { username, password, role }, // Password might be optional for update if not changing
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      toast.success('User created successfully!');
+      toast.success(successMessage);
       if (onClose) {
         onClose();
       }
     } catch (err) {
-      toast.error('Failed to create user. Please try again.');
+      const errorMessage = userId ? 'Failed to update user.' : 'Failed to create user.';
+      toast.error(`${errorMessage} Check console for details.`);
       setError(err.response?.data?.message || 'An error occurred.');
     } finally {
       setLoading(false);
@@ -120,7 +158,7 @@ const UserForm = ({ onClose }) => {
           className="text-white px-6 py-2 rounded-md text-lg font-semibold bg-[#4988d4] hover:bg-[#3a70b0] focus:outline-none focus:ring-2 focus:ring-[#4988d4] focus:ring-opacity-50"
           disabled={loading}
         >
-          {loading ? 'Creating...' : 'Create User'}
+          {loading ? 'Submitting...' : (userId ? 'Update User' : 'Create User')}
         </button>
       </div>
     </form>

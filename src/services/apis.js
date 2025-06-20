@@ -3,6 +3,10 @@ export const BASE_URL = 'https://moh.sahansoft.com/api';
 // Authentication Endpoints
 export const REGISTER_SUPERADMIN_URL = `${BASE_URL}/auth/register-superadmin`; // Register Super Admin
 export const REGISTER_URL = `${BASE_URL}/auth/register`; // Register User
+export const GET_USERS_URL = `${BASE_URL}/auth/users`; // Get All Users
+export const GET_SINGLE_USER_URL = (userId) => `${BASE_URL}/auth/users/${userId}`; // Get Single User
+export const UPDATE_USER_URL = (userId) => `${BASE_URL}/auth/users/${userId}`; // Update User
+export const DELETE_USER_URL = (userId) => `${BASE_URL}/auth/users/${userId}`; // Delete User
 export const ADMIN_LOGIN_URL = `${BASE_URL}/auth/login`; // Admin Login
 
 // Menu Endpoints
