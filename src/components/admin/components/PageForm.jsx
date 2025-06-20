@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { CREATE_PAGE_URL, GET_SINGLE_PAGE_URL, UPDATE_PAGE_URL, GET_ALL_SECTIONS_URL } from '../../../services/apis';
-import { Edit3, Type } from 'lucide-react';
+import { Edit3, Type, X } from 'lucide-react';
 import Select from 'react-select';
 
 const PageForm = ({ onClose, pageId }) => {
@@ -21,7 +21,7 @@ const PageForm = ({ onClose, pageId }) => {
         const response = await axios.get(GET_ALL_SECTIONS_URL, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setAllSections(response.data.map(section => ({ value: section._id, label: section.section_name })));
+        setAllSections(response.data);
       } catch (err) {
         console.error('Error fetching sections:', err);
         toast.error('Failed to fetch sections.');
@@ -107,11 +107,20 @@ const PageForm = ({ onClose, pageId }) => {
     }
   };
 
-  const handleSectionChange = (selectedOptions) => {
-    const newSections = selectedOptions.map((option, index) => ({
-      section: option.value,
-      order: index + 1,
-    }));
+  const handleAddSection = (selectedOption) => {
+    if (selectedOption && !sectionAssignedIds.some(s => s.section === selectedOption.value)) {
+      const newSection = {
+        section: selectedOption.value,
+        order: sectionAssignedIds.length + 1,
+      };
+      setSectionAssignedIds([...sectionAssignedIds, newSection]);
+    }
+  };
+
+  const handleRemoveSection = (sectionId) => {
+    const newSections = sectionAssignedIds
+      .filter(s => s.section !== sectionId)
+      .map((s, index) => ({ ...s, order: index + 1 }));
     setSectionAssignedIds(newSections);
   };
 
@@ -162,17 +171,58 @@ const PageForm = ({ onClose, pageId }) => {
       {/* Sections Field */}
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="sections">
-          Sections
+          Search and Add Sections
         </label>
         <Select
-          isMulti
-          options={allSections}
-          value={allSections.filter(option => sectionAssignedIds.some(s => s.section === option.value))}
-          onChange={handleSectionChange}
+          options={allSections.map(section => ({ value: section._id, label: section.section_name }))}
+          onChange={handleAddSection}
           className="mt-1"
           classNamePrefix="select"
-          placeholder="Select sections"
+          placeholder="Search and add sections"
+          value={null}
         />
+        <div className="mt-4">
+          <h4 className="text-sm font-medium text-gray-700 mb-2">Assigned Sections:</h4>
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Order
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Section Name
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Section Type
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {sectionAssignedIds.map(({ section, order }) => {
+                const sectionData = allSections.find(s => s._id === section);
+                return (
+                  <tr key={section}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{sectionData?.section_name || 'Unknown Section'}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{sectionData?.section_type || 'N/A'}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveSection(section)}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        <X size={16} />
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {error && <p className="text-red-500 text-sm mb-4">Error: {error}</p>}
