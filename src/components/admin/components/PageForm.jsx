@@ -50,7 +50,8 @@ const PageForm = ({ onClose, pageId }) => {
           const pageData = response.data;
           setTitle(pageData.title || '');
           setSlug(pageData.slug || '');
-          setSectionAssignedIds(pageData.section_assigned_ids || []);
+          const assignedSections = pageData.section_assigned_ids.map(s => ({ section: s.section._id, order: s.order }));
+          setSectionAssignedIds(assignedSections || []);
         } catch (err) {
           setError('Failed to fetch page data. Check console for details.');
           console.error('Error fetching page data:', err);
@@ -85,6 +86,8 @@ const PageForm = ({ onClose, pageId }) => {
         slug,
         section_assigned_ids: sectionAssignedIds,
       };
+
+      console.log('Payload:', payload); // Add this line for debugging
 
       await axios[method](
         url,
