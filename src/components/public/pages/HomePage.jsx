@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const HomePage = () => {
-  const [endTime] = useState(new Date().getTime() + 24 * 60 * 60 * 1000);
+  const [endTime] = useState(new Date('2025-06-22T11:21:22+03:00').getTime());
   const [timeLeft, setTimeLeft] = useState({});
 
   useEffect(() => {
