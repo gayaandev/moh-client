@@ -4,40 +4,12 @@ import { Link } from 'react-router-dom';
 const PublicLayout = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
+      <header className="bg-gray-800 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <Link to="/" className="flex items-center">
-                  <span className="bg-blue w-8 h-8 rounded-md flex items-center justify-center mr-2">
-                    <span className="text-white font-bold">M</span>
-                  </span>
-                  <span className="text-xl font-bold text-gray-800">Ministry of Health</span>
-                </Link>
-              </div>
-            </div>
-            <nav className="flex space-x-8">
-              <Link to="/" className="text-gray-700 hover:text-blue px-3 py-2 font-medium">
-                Home
-              </Link>
-              <Link to="/about" className="text-gray-700 hover:text-blue px-3 py-2 font-medium">
-                About
-              </Link>
-              <Link to="/services" className="text-gray-700 hover:text-blue px-3 py-2 font-medium">
-                Services
-              </Link>
-              <Link to="/news" className="text-gray-700 hover:text-blue px-3 py-2 font-medium">
-                News
-              </Link>
-              <Link to="/contact" className="text-gray-700 hover:text-blue px-3 py-2 font-medium">
-                Contact
-              </Link>
-              <Link to="/admin" className="bg-secondary text-white px-3 py-2 rounded-md font-medium" style={{ backgroundColor: '#4988d4' }}>
-                Admin
-              </Link>
-            </nav>
+          <div className="flex justify-end h-16 items-center">
+            <Link to="/admin" className="bg-blue-500 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-600">
+              Admin
+            </Link>
           </div>
         </div>
       </header>
@@ -50,7 +22,7 @@ const PublicLayout = ({ children }) => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white">
+      {/* <footer className="bg-gray-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
@@ -82,7 +54,7 @@ const PublicLayout = ({ children }) => {
             &copy; {new Date().getFullYear()} Ministry of Health. All rights reserved.
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };
