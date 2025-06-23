@@ -105,6 +105,9 @@ const MainHeader = ({ menuTree, pageContent }) => {
             <div className="flex items-center">
               <img src={mohLogo} alt="Ministry of Health Logo" className="h-16 w-auto" />
               <div className="ml-3 text-sm font-medium text-blue-900 leading-tight">
+                <div>Ministry Of Health</div>
+                <div>JSS</div>
+
               </div>
             </div>
             
