@@ -120,7 +120,9 @@ const MainHeader = ({ menuTree, pageContent }) => {
                       className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center ${
                         item.name.toUpperCase() === 'HOME' && pageContent?.slug === 'homepage_1'
                           ? 'text-[#4988d4]'
-                          : 'text-gray-700 hover:text-[#4988d4]'
+                          : item.name.toUpperCase() === 'CONTACT US'
+                            ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
+                            : 'text-gray-700 hover:text-[#4988d4]'
                       }`}
                     >
                       {item.name}
