@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MainHeader from '../../components/home/MainHeader';
 import { GET_ALL_MENU_ITEMS_URL, GET_PAGE_BY_SLUG_PUBLI_URL } from '../../../../services/apis';
+import AboutMinistryHomepage from '../../components/home/AboutMinistryHomepage';
 
 const Spinner = () => (
   <div className="fixed inset-0 flex justify-center items-center z-50">
@@ -15,7 +16,7 @@ const Spinner = () => (
 
 const HomePage = () => {
   const [menuTree, setMenuTree] = useState([]);
-  const [pageContent, setPageContent] = useState(null);
+  const [pageContent, setPageContent] = useState(null); // Reverted to single pageContent
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -28,16 +29,16 @@ const HomePage = () => {
         });
         if (!menuResponse.ok) throw new Error('Failed to fetch menu items');
         const menuData = await menuResponse.json();
+        setMenuTree(buildMenuTree(menuData));
         
-        // Fetch page content
+        // Fetch homepage_1 content
         const pageResponse = await fetch(GET_PAGE_BY_SLUG_PUBLI_URL('homepage_1'), {
           headers: { 'X-API-Key': import.meta.env.VITE_X_API_KEY },
         });
         if (!pageResponse.ok) throw new Error('Failed to fetch page content');
         const pageData = await pageResponse.json();
-        
-        setMenuTree(buildMenuTree(menuData));
-        setPageContent(pageData);
+        setPageContent(pageData); // Set to single pageContent
+
       } catch (error) {
         setError(error.message);
       } finally {
@@ -73,6 +74,7 @@ const HomePage = () => {
     <div>
       {loading && <Spinner />}
       <MainHeader menuTree={menuTree} pageContent={pageContent} />
+      <AboutMinistryHomepage />
     </div>
   );
 };

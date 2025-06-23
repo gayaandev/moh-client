@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import mohLogo from '../../../../assets/moh-logo.png';
 import { LogIn, Phone, Mail } from 'lucide-react';
+import SectionRenderer from '../SectionRenderer';
 
 // Lucide icon components
 const FacebookIcon = () => (
@@ -30,35 +30,6 @@ const getSocialIcon = (url) => {
   if (url.includes('twitter')) return <TwitterIcon />;
   if (url.includes('instagram')) return <InstagramIcon />;
   return null;
-};
-
-const SectionRenderer = ({ section }) => {
-  if (!section) return null;
-
-  // Simple renderer based on section_type
-  switch (section.section_type) {
-    case 'homepage': // For sections like 'Management'
-      return (
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8 justify-center">
-            {Object.values(section.columns).map((col, index) => (
-              col.content ? (
-                <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden max-w-xs mx-auto border-4 border-white">
-                  {col.images[0] && <img src={col.images[0]} alt="" className="w-full h-64 object-cover" />}
-                  <div className="p-6 text-center">
-                    <div className="font-bold text-xl mb-2">
-                      {col.content.split('\n').map((line, i) => <p key={i}>{line}</p>)}
-                    </div>
-                  </div>
-                </div>
-              ) : null
-            ))}
-          </div>
-        </div>
-      );
-    default:
-      return null;
-  }
 };
 
 const MainHeader = ({ menuTree, pageContent }) => {
@@ -144,9 +115,13 @@ const MainHeader = ({ menuTree, pageContent }) => {
               <ul className="flex space-x-1 items-center">
                 {menuTree.map((item) => (
                   <li key={item._id} className="relative group">
-                    <Link
-                      to={item.path}
-                      className="text-gray-700 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center"
+                    <a
+                      href="#"
+                      className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center ${
+                        item.name.toUpperCase() === 'HOME' && pageContent?.slug === 'homepage_1'
+                          ? 'text-[#4988d4]'
+                          : 'text-gray-700 hover:text-[#4988d4]'
+                      }`}
                     >
                       {item.name}
                       {item.children.length > 0 && (
@@ -154,15 +129,15 @@ const MainHeader = ({ menuTree, pageContent }) => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
                       )}
-                    </Link>
+                    </a>
                     {item.children.length > 0 && (
-                      <div className="absolute left-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
+                      <div className="absolute left-0 mt-1 w-48 rounded-md shadow-lg bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
                         <ul className="py-1">
                           {item.children.map((child) => (
                             <li key={child._id}>
-                              <Link to={child.path} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                 {child.name}
-                              </Link>
+                              </a>
                             </li>
                           ))}
                         </ul>
