@@ -20,6 +20,7 @@ export const DELETE_MENU_ITEM_URL = (id) => `${BASE_URL}/menu/items/${id}`; // D
 // Page Endpoints
 export const GET_HOMEPAGE_URL = `${BASE_URL}/admin/pages/homepage`; // Get Homepage Content
 export const GET_PAGE_BY_SLUG_URL = (slug) => `${BASE_URL}/admin/pages/${slug}`; // Get Page by Slug
+export const GET_PAGE_BY_SLUG_PUBLI_URL = (slug) => `${BASE_URL}/pages/${slug}`; // Get Page by Slug Public
 export const CREATE_PAGE_URL = `${BASE_URL}/admin/pages`; // Create New Page
 export const GET_ALL_PAGES_URL = `${BASE_URL}/admin/pages`; // Get All Pages
 export const GET_SINGLE_PAGE_URL = (id) => `${BASE_URL}/admin/pages/${id}`; // Get Single Page

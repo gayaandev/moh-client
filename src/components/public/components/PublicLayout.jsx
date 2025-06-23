@@ -3,16 +3,14 @@ import { Link } from 'react-router-dom';
 
 const PublicLayout = ({ children }) => {
   return (
-    <div className="bg-white text-gray-800">
+    <div className="bg-white text-gray-800 min-h-screen flex flex-col">
       {/* Main Content */}
       <main className="flex-grow">
-        <div className="py-6 sm:px-6 lg:px-8">
-          {children}
-        </div>
+        {children}
       </main>
 
       {/* Footer */}
-      <footer className="bg-white text-gray-800">
+      <footer className="bg-white text-gray-800 mt-auto">
         <div className="px-4 sm:px-6 lg:px-8 py-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
