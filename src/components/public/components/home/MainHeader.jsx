@@ -103,10 +103,8 @@ const MainHeader = ({ menuTree, pageContent }) => {
           <div className="px-6 py-3 flex justify-between items-center">
             {/* Logo and ministry name */}
             <div className="flex items-center">
-              <img src={mohLogo} alt="Ministry of Health Logo" className="h-12 w-auto" />
+              <img src={mohLogo} alt="Ministry of Health Logo" className="h-16 w-auto" />
               <div className="ml-3 text-sm font-medium text-blue-900 leading-tight">
-                <div>MINISTRY OF HEALTH</div>
-                <div>JUBALAND STATE OF SOMALIA</div>
               </div>
             </div>
             
