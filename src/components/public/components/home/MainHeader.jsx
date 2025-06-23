@@ -24,19 +24,11 @@ const InstagramIcon = () => (
   </svg>
 );
 
-const YoutubeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-  </svg>
-);
-
 // Map social media URLs to their respective icons
 const getSocialIcon = (url) => {
   if (url.includes('facebook')) return <FacebookIcon />;
   if (url.includes('twitter')) return <TwitterIcon />;
   if (url.includes('instagram')) return <InstagramIcon />;
-  if (url.includes('youtube')) return <YoutubeIcon />;
   return null;
 };
 
@@ -47,15 +39,17 @@ const SectionRenderer = ({ section }) => {
   switch (section.section_type) {
     case 'homepage': // For sections like 'Management'
       return (
-        <div className="container mx-auto px-6 py-12">
-          <h2 className="text-3xl font-bold text-center mb-8">{section.section_name}</h2>
-          <div className="grid md:grid-cols-3 gap-8 text-center">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">{section.section_name}</h2>
+          <div className="grid md:grid-cols-3 gap-8 justify-center">
             {Object.values(section.columns).map((col, index) => (
               col.content ? (
-                <div key={index}>
-                  {col.images[0] && <img src={col.images[0]} alt="" className="w-32 h-32 rounded-full mx-auto mb-4" />}
-                  <div className="font-semibold">
-                    {col.content.split('\n').map((line, i) => <p key={i}>{line}</p>)}
+                <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden max-w-xs mx-auto">
+                  {col.images[0] && <img src={col.images[0]} alt="" className="w-full h-80 object-cover" />}
+                  <div className="p-6 text-center">
+                    <div className="font-bold text-xl mb-2">
+                      {col.content.split('\n').map((line, i) => <p key={i}>{line}</p>)}
+                    </div>
                   </div>
                 </div>
               ) : null
@@ -136,7 +130,6 @@ const MainHeader = () => {
   
   // Get the background image from the main-header section
   const mainHeaderImage = mainHeaderSection?.columns?.column1?.images?.[0];
-  console.log("Background image URL:", mainHeaderImage); // Debug log to verify the URL
   
   // Get the content from the main-header section
   const headerContent = mainHeaderSection?.columns?.column1?.content?.split('\n') || [];
@@ -149,26 +142,35 @@ const MainHeader = () => {
     <div className="min-h-screen flex flex-col">
       {/* Site info section (top bar) */}
       {siteInfoSection && (
-        <div className="bg-gray-100 text-gray-600 text-xs">
-          <div className="container mx-auto px-6 py-1 flex justify-between items-center">
-            <div className="flex space-x-4">
+        <div className="bg-gray-800 text-gray-300 text-xs">
+          <div className="container mx-auto px-6 py-2 flex justify-between items-center">
+            <div className="flex space-x-4 items-center">
               {siteInfoSection.columns.column1.content.split('\n').map((line, index) => (
                 <span key={index}>{line}</span>
               ))}
             </div>
-            <div className="flex space-x-3">
-              {siteInfoSection.columns.column1.links.map(link => (
-                <a
-                  key={link._id}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-gray-900 flex items-center"
-                  title={link.title}
+            <div className="flex space-x-4 items-center">
+              <div className="flex space-x-3">
+                <a href="#" className="hover:text-white"><FacebookIcon /></a>
+                <a href="#" className="hover:text-white"><TwitterIcon /></a>
+                <a href="#" className="hover:text-white"><InstagramIcon /></a>
+              </div>
+              {/* Language selector */}
+              <div className="flex items-center text-sm text-white">
+                <img
+                  src="https://flagcdn.com/w20/gb.png"
+                  alt="English"
+                  className="w-5 h-auto mr-1"
+                />
+                <select
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                  className="bg-transparent border-none text-sm focus:outline-none cursor-pointer text-white"
                 >
-                  {getSocialIcon(link.url) || link.title}
-                </a>
-              ))}
+                  <option value="English" className="text-black">English</option>
+                  <option value="Somali" className="text-black">Somali</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
@@ -176,44 +178,23 @@ const MainHeader = () => {
       
       {/* Hero section with background image */}
       <div
-        className="relative"
+        className="relative pb-32"
         style={{
           backgroundImage: mainHeaderImage ? `url(${mainHeaderImage})` : 'none',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          minHeight: '500px'
+          minHeight: '700px'
         }}
       >
-        {/* Removed the black overlay */}
-        
-        {/* Language selector */}
-        <div className="flex justify-end px-4 py-1 relative z-10">
-          <div className="flex items-center text-sm text-white">
-            <img
-              src="https://flagcdn.com/w20/gb.png"
-              alt="English"
-              className="w-5 h-auto mr-1"
-            />
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="bg-transparent border-none text-sm focus:outline-none cursor-pointer text-white"
-            >
-              <option value="English" className="text-black">English</option>
-              <option value="Somali" className="text-black">Somali</option>
-            </select>
-          </div>
-        </div>
-        
         {/* Main header */}
-        <header className="bg-white shadow-md rounded-3xl mx-4 mb-4 relative z-10">
+        <header className="absolute top-5 left-1/2 -translate-x-1/2 w-full lg:w-4/5 bg-white shadow-md rounded-lg z-30">
           <div className="px-6 py-3 flex justify-between items-center">
             {/* Logo and ministry name */}
             <div className="flex items-center">
               <img src={mohLogo} alt="Ministry of Health Logo" className="h-12 w-auto" />
-              <div className="ml-3 text-sm font-medium text-green-800 leading-tight">
+              <div className="ml-3 text-sm font-medium text-blue-900 leading-tight">
                 <div>MINISTRY OF</div>
-                <div>HEALTH</div>
+                <div>AGRICULTURE AND IRRIGATION</div>
               </div>
             </div>
             
@@ -251,16 +232,6 @@ const MainHeader = () => {
               </ul>
             </nav>
             
-            {/* ERP Button */}
-            <div>
-              <Link
-                to="/login"
-                className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              >
-                ERP MOH
-              </Link>
-            </div>
-            
             {/* Mobile menu button - hidden on desktop */}
             <div className="md:hidden">
               <button className="text-gray-700 hover:text-green-700 focus:outline-none">
@@ -271,34 +242,38 @@ const MainHeader = () => {
             </div>
           </div>
         </header>
-        
+
         {/* Hero content */}
         {mainHeaderSection && (
-          <div className="container mx-auto px-6 pt-20 pb-24 relative z-10 text-white">
+          <div className="container mx-auto px-6 pt-48 pb-32 relative z-10 text-white">
             <div className="max-w-3xl">
               {headerContent.map((line, index) => (
-                <h1 key={index} className={`${index === 0 ? 'text-5xl' : 'text-4xl'} font-bold ${index > 0 ? 'mt-2' : 'mb-4'}`}>
+                <h1 key={index} className={`${index === 0 ? 'text-5xl text-blue-300' : 'text-6xl'} font-bold ${index > 0 ? 'mt-2' : 'mb-4'}`}>
                   {line}
                 </h1>
               ))}
               
               <div className="mt-8 flex flex-wrap gap-4">
                 {mainHeaderSection.columns.column2.content && (
-                  <a href="#learn-more" className="bg-white text-green-800 hover:bg-gray-100 px-6 py-3 rounded-md font-medium">
+                  <a href="#learn-more" className="bg-white text-green-800 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium">
                     {mainHeaderSection.columns.column2.content}
                   </a>
                 )}
-                <a href="#reports" className="border border-white text-white hover:bg-white hover:text-green-800 px-6 py-3 rounded-md font-medium transition-colors">
+                <a href="#reports" className="border border-white text-white hover:bg-white hover:text-green-800 px-6 py-3 rounded-lg font-medium transition-colors">
                   See Our Reports
                 </a>
               </div>
             </div>
           </div>
         )}
+
+        {/* Management section */}
+        {managementSection && (
+          <div className="absolute -bottom-48 left-1/2 -translate-x-1/2 w-full lg:w-4/5 z-20">
+            <SectionRenderer section={managementSection} />
+          </div>
+        )}
       </div>
-      
-      {/* Management section */}
-      {managementSection && <SectionRenderer section={managementSection} />}
     </div>
   );
 };
