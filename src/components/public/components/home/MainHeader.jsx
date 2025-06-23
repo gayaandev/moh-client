@@ -40,12 +40,11 @@ const SectionRenderer = ({ section }) => {
     case 'homepage': // For sections like 'Management'
       return (
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">{section.section_name}</h2>
           <div className="grid md:grid-cols-3 gap-8 justify-center">
             {Object.values(section.columns).map((col, index) => (
               col.content ? (
-                <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden max-w-xs mx-auto">
-                  {col.images[0] && <img src={col.images[0]} alt="" className="w-full h-80 object-cover" />}
+                <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden max-w-xs mx-auto border-4 border-white">
+                  {col.images[0] && <img src={col.images[0]} alt="" className="w-full h-64 object-cover" />}
                   <div className="p-6 text-center">
                     <div className="font-bold text-xl mb-2">
                       {col.content.split('\n').map((line, i) => <p key={i}>{line}</p>)}
@@ -186,6 +185,7 @@ const MainHeader = () => {
           minHeight: '700px'
         }}
       >
+        <div className="absolute inset-0 bg-blue-900 opacity-50 z-0"></div>
         {/* Main header */}
         <header className="absolute top-5 left-1/2 -translate-x-1/2 w-full lg:w-4/5 bg-white shadow-md rounded-lg z-30">
           <div className="px-6 py-3 flex justify-between items-center">
@@ -248,7 +248,7 @@ const MainHeader = () => {
           <div className="container mx-auto px-6 pt-48 pb-32 relative z-10 text-white">
             <div className="max-w-3xl">
               {headerContent.map((line, index) => (
-                <h1 key={index} className={`${index === 0 ? 'text-5xl text-blue-300' : 'text-6xl'} font-bold ${index > 0 ? 'mt-2' : 'mb-4'}`}>
+                <h1 key={index} className={`${index === 0 ? 'text-5xl text-white' : 'text-6xl'} font-bold ${index > 0 ? 'mt-2' : 'mb-4'}`}>
                   {line}
                 </h1>
               ))}
