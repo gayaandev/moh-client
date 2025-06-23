@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { GET_ALL_MENU_ITEMS_URL, GET_PAGE_BY_SLUG_PUBLI_URL } from '../../../../services/apis';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import mohLogo from '../../../../assets/moh-logo.png';
 import { LogIn, Phone, Mail } from 'lucide-react';
@@ -62,63 +61,7 @@ const SectionRenderer = ({ section }) => {
   }
 };
 
-const MainHeader = () => {
-  const [menuTree, setMenuTree] = useState([]);
-  const [pageContent, setPageContent] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch menu items
-        const menuResponse = await fetch(GET_ALL_MENU_ITEMS_URL, {
-          headers: { 'X-API-Key': import.meta.env.VITE_X_API_KEY },
-        });
-        if (!menuResponse.ok) throw new Error('Failed to fetch menu items');
-        const menuData = await menuResponse.json();
-        
-        // Fetch page content
-        const pageResponse = await fetch(GET_PAGE_BY_SLUG_PUBLI_URL('homepage_1'), {
-          headers: { 'X-API-Key': import.meta.env.VITE_X_API_KEY },
-        });
-        if (!pageResponse.ok) throw new Error('Failed to fetch page content');
-        const pageData = await pageResponse.json();
-        
-        setMenuTree(buildMenuTree(menuData));
-        setPageContent(pageData);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const buildMenuTree = (items) => {
-      const itemMap = {};
-      const roots = [];
-      items.forEach(item => {
-        itemMap[item._id] = { ...item, children: [] };
-      });
-      items.forEach(item => {
-        if (item.parent && itemMap[item.parent]) {
-          itemMap[item.parent].children.push(itemMap[item._id]);
-        } else {
-          roots.push(itemMap[item._id]);
-        }
-      });
-      const sortByOrder = (a, b) => a.order - b.order;
-      roots.sort(sortByOrder);
-      roots.forEach(root => root.children.sort(sortByOrder));
-      return roots;
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) return <div className="flex justify-center items-center h-20">Loading...</div>;
-  if (error) return <div className="flex justify-center items-center h-20 text-red-500">Error: {error}</div>;
-
+const MainHeader = ({ menuTree, pageContent }) => {
   // Find the siteinfo section if it exists
   const siteInfoSection = pageContent?.section_assigned_ids
     ?.find(section => section.section?.section_type === 'siteinfo')?.section;
@@ -191,8 +134,8 @@ const MainHeader = () => {
             <div className="flex items-center">
               <img src={mohLogo} alt="Ministry of Health Logo" className="h-12 w-auto" />
               <div className="ml-3 text-sm font-medium text-blue-900 leading-tight">
-                <div>MINISTRY OF</div>
-                <div>AGRICULTURE AND IRRIGATION</div>
+                <div>MINISTRY OF HEALTH</div>
+                <div>JUBALAND STATE OF SOMALIA</div>
               </div>
             </div>
             
