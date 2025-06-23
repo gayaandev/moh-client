@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GET_ALL_MENU_ITEMS_URL, GET_PAGE_BY_SLUG_PUBLI_URL } from '../../../../services/apis';
 import { Link } from 'react-router-dom';
 import mohLogo from '../../../../assets/moh-logo.png';
+import { LogIn, Phone, Mail } from 'lucide-react';
 
 // Lucide icon components
 const FacebookIcon = () => (
@@ -66,7 +67,6 @@ const MainHeader = () => {
   const [pageContent, setPageContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [language, setLanguage] = useState('English');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -139,42 +139,6 @@ const MainHeader = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Site info section (top bar) */}
-      {siteInfoSection && (
-        <div className="bg-gray-800 text-gray-300 text-xs">
-          <div className="container mx-auto px-6 py-2 flex justify-between items-center">
-            <div className="flex space-x-4 items-center">
-              {siteInfoSection.columns.column1.content.split('\n').map((line, index) => (
-                <span key={index}>{line}</span>
-              ))}
-            </div>
-            <div className="flex space-x-4 items-center">
-              <div className="flex space-x-3">
-                <a href="#" className="hover:text-white"><FacebookIcon /></a>
-                <a href="#" className="hover:text-white"><TwitterIcon /></a>
-                <a href="#" className="hover:text-white"><InstagramIcon /></a>
-              </div>
-              {/* Language selector */}
-              <div className="flex items-center text-sm text-white">
-                <img
-                  src="https://flagcdn.com/w20/gb.png"
-                  alt="English"
-                  className="w-5 h-auto mr-1"
-                />
-                <select
-                  value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
-                  className="bg-transparent border-none text-sm focus:outline-none cursor-pointer text-white"
-                >
-                  <option value="English" className="text-black">English</option>
-                  <option value="Somali" className="text-black">Somali</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-      
       {/* Hero section with background image */}
       <div
         className="relative pb-32"
@@ -185,9 +149,43 @@ const MainHeader = () => {
           minHeight: '700px'
         }}
       >
+        {/* Site info section (top bar) */}
+        {siteInfoSection && (
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full lg:w-4/5 z-40 text-white text-xs">
+            <div className="container mx-auto px-6 py-2 flex justify-between items-center">
+              <div className="flex space-x-2 items-center">
+                {siteInfoSection.columns.column1.content.split('\n').map((line, index, array) => (
+                  <React.Fragment key={index}>
+                    <span className="flex items-center">
+                      {line.includes('@') ? <Mail className="w-4 h-4 mr-1" /> : <Phone className="w-4 h-4 mr-1" />}
+                      {line}
+                    </span>
+                    {index < array.length - 1 && <span className="opacity-50">|</span>}
+                  </React.Fragment>
+                ))}
+              </div>
+              <div className="flex space-x-4 items-center">
+                <div className="flex space-x-3">
+                  <a href="#" className="hover:text-white"><FacebookIcon /></a>
+                  <a href="#" className="hover:text-white"><TwitterIcon /></a>
+                  <a href="#" className="hover:text-white"><InstagramIcon /></a>
+                </div>
+                <a
+                  href="https://www.mohjubalandstate.so/admin/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center text-sm text-white hover:text-gray-200"
+                >
+                  <LogIn className="w-4 h-4 mr-1" />
+                  <span>Login</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="absolute inset-0 bg-blue-900 opacity-50 z-0"></div>
         {/* Main header */}
-        <header className="absolute top-5 left-1/2 -translate-x-1/2 w-full lg:w-4/5 bg-white shadow-md rounded-lg z-30">
+        <header className="absolute top-12 left-1/2 -translate-x-1/2 w-full lg:w-4/5 bg-white shadow-md rounded-lg z-30">
           <div className="px-6 py-3 flex justify-between items-center">
             {/* Logo and ministry name */}
             <div className="flex items-center">
@@ -245,7 +243,7 @@ const MainHeader = () => {
 
         {/* Hero content */}
         {mainHeaderSection && (
-          <div className="container mx-auto px-6 pt-48 pb-32 relative z-10 text-white">
+          <div className="w-full lg:w-4/5 mx-auto px-6 pt-48 pb-32 relative z-10 text-white">
             <div className="max-w-3xl">
               {headerContent.map((line, index) => (
                 <h1 key={index} className={`${index === 0 ? 'text-5xl text-white' : 'text-6xl'} font-bold ${index > 0 ? 'mt-2' : 'mb-4'}`}>
