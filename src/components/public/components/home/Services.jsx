@@ -41,7 +41,7 @@ const Services = () => {
           const [title, ...descriptionParts] = col.content.split('\n');
           const description = descriptionParts.join('\n').trim();
           if (title) { // Only add if there's a title
-            allServices.push({ title: title.trim(), description });
+            allServices.push({ title: title.trim(), description, imageUrl: col.images?.[0]?.replace(/"/g, '') });
           }
         }
       });
@@ -50,12 +50,23 @@ const Services = () => {
 
   return (
     <section className="w-full lg:w-4/5 mx-auto px-6 py-16">
-      <h2 className="text-center text-4xl font-bold text-gray-900 mb-12">
+      <h2 className="text-center text-4xl font-bold text-[#6DA2D5] mb-4">
         {pageContent.title.replace(/[\t()]|Homepage/g, '')} {/* Remove tab characters, parentheses, and "Homepage" from title */}
       </h2>
+      <div className="w-20 h-1 bg-[#6DA2D5] mx-auto mb-12"></div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {allServices.map((service, index) => (
           <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <div className="w-20 h-20 rounded-full bg-[#E0F2F7] flex items-center justify-center mb-4">
+              {service.imageUrl ? (
+                <img src={service.imageUrl} alt={service.title} className="w-full h-full object-contain" />
+              ) : (
+                // Fallback if no image URL is provided yet
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#4988D4]">
+                  <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+              )}
+            </div>
             <h3 className="text-xl font-semibold text-gray-800 mb-3">{service.title}</h3>
             <p className="text-gray-600">{service.description}</p>
           </div>
