@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MainHeader from '../../components/home/MainHeader';
 import { GET_ALL_MENU_ITEMS_URL, GET_PAGE_BY_SLUG_PUBLI_URL } from '../../../../services/apis';
 import AboutMinistryHomepage from '../../components/home/AboutMinistryHomepage';
+import Services from '../../components/home/Services';
 
 const Spinner = () => (
   <div className="fixed inset-0 flex justify-center items-center z-50">
@@ -75,6 +76,7 @@ const HomePage = () => {
       {loading && <Spinner />}
       <MainHeader menuTree={menuTree} pageContent={pageContent} />
       <AboutMinistryHomepage />
+      <Services />
     </div>
   );
 };
