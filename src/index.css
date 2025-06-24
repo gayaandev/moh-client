@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 @import 'tailwindcss';
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -37,4 +37,8 @@
 * {
   scrollbar-width: thin; /* "auto" or "thin" */
   scrollbar-color: rgba(156, 163, 175, 0.5) transparent; /* thumb and track color */
+}
+
+body {
+  font-family: 'Lato', sans-serif;
 }
