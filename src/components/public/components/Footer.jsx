@@ -5,8 +5,8 @@ import mohLogo from './../../../assets/moh-logo.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-16"> {/* Ignoring color, setting dark background */}
-      <div className="container mx-auto px-6">
+    <footer className="bg-gray-900 text-white"> {/* Ignoring color, setting dark background */}
+      <div className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
           {/* First Column (Left Box) */}
           <div className="bg-gray-800 p-8 rounded-lg"> {/* Ignoring color, setting lighter background */}
@@ -81,6 +81,10 @@ const Footer = () => {
             </button>
           </div>
         </div>
+      </div>
+      {/* Copyright bar as a separate section */}
+      <div className="bg-gray-900 py-4 border-t border-[#192030] text-center text-gray-500">
+        &copy; {new Date().getFullYear()} Ministry of Health. All rights reserved.
       </div>
     </footer>
   );
