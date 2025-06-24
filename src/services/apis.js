@@ -13,6 +13,7 @@ export const ADMIN_LOGIN_URL = `${BASE_URL}/auth/login`; // Admin Login
 export const GET_MENU_URL = `${BASE_URL}/menu`; // Get Public Menu
 export const CREATE_MENU_ITEM_URL = `${BASE_URL}/menu/items`; // Create Menu Item
 export const GET_ALL_MENU_ITEMS_URL = `${BASE_URL}/menu/items/all`; // Get All Menu Items
+export const GET_ALL_MENU_ITEMS_URL_ADMIN = `${BASE_URL}/menu/admin/items/all`; // Get All Menu Items
 export const GET_SINGLE_MENU_ITEM_URL = (id) => `${BASE_URL}/menu/items/${id}`; // Get Single Menu Item
 export const UPDATE_MENU_ITEM_URL = (id) => `${BASE_URL}/menu/items/${id}`; // Update Menu Item
 export const DELETE_MENU_ITEM_URL = (id) => `${BASE_URL}/menu/items/${id}`; // Delete Menu Item

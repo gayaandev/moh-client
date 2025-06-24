@@ -4,7 +4,7 @@ import Modal from '../components/Modal';
 import MenuItemForm from '../components/MenuItemForm'; // Component for adding new menu items
 import MenuItemFormUpdate from '../components/MenuItemFormUpdate'; // Component for updating existing menu items
 import axios from 'axios'; // Import axios
-import { GET_ALL_MENU_ITEMS_URL, DELETE_MENU_ITEM_URL } from '../../../services/apis'; // Import API URLs
+import { GET_ALL_MENU_ITEMS_URL_ADMIN, DELETE_MENU_ITEM_URL } from '../../../services/apis'; // Import API URLs
 import toast from 'react-hot-toast'; // Import toast
 import ConfirmationDialog from '../components/ConfirmationDialog'; // Import ConfirmationDialog
 import { X, ChevronRight, Menu, Settings } from 'lucide-react'; // Import icons from lucide-react
@@ -41,7 +41,7 @@ const AllMenuItemsPage = () => {
     // Re-fetch menu items after closing modal
     const token = sessionStorage.getItem('token');
     if (token) {
-      axios.get(GET_ALL_MENU_ITEMS_URL, { headers: { Authorization: `Bearer ${token}` } })
+      axios.get(GET_ALL_MENU_ITEMS_URL_ADMIN, { headers: { Authorization: `Bearer ${token}` } })
         .then(response => {
           const sortedAndTreeItems = buildMenuTree(response.data);
           setMenuItems(sortedAndTreeItems);
@@ -101,7 +101,7 @@ const AllMenuItemsPage = () => {
       }
 
       try {
-        const response = await axios.get(GET_ALL_MENU_ITEMS_URL, {
+        const response = await axios.get(GET_ALL_MENU_ITEMS_URL_ADMIN, {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log('Fetched menu items:', response.data); // Log fetched data

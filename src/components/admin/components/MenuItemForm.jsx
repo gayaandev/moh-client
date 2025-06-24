@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Import axios
-import { CREATE_MENU_ITEM_URL, GET_ALL_MENU_ITEMS_URL } from '../../../services/apis'; // Import API URLs
+import { CREATE_MENU_ITEM_URL, GET_ALL_MENU_ITEMS_URL_ADMIN } from '../../../services/apis'; // Import API URLs
 import toast, { Toaster } from 'react-hot-toast';
 import { Edit3, Link as LinkIcon, ListOrdered, Layers } from 'lucide-react'; // Import relevant icons
 
@@ -22,7 +22,7 @@ const MenuItemForm = ({ onClose }) => {
       if (!token) return;
 
       try {
-        const response = await axios.get(GET_ALL_MENU_ITEMS_URL, {
+        const response = await axios.get(GET_ALL_MENU_ITEMS_URL_ADMIN, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setParentOptions(response.data);

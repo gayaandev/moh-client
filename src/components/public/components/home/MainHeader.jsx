@@ -135,7 +135,7 @@ const MainHeader = ({ menuTree, pageContent }) => {
                       )}
                     </a>
                     {item.children.length > 0 && (
-                      <div className="absolute left-0 mt-1 w-48 rounded-md shadow-lg bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
+                      <div className="absolute left-0 mt-1 w-max rounded-md shadow-lg bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
                         <ul className="py-1">
                           {item.children.map((child) => (
                             <li key={child._id}>
