@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white"> {/* Ignoring color, setting dark background */}
       <div className="container mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-16 items-start">
           {/* First Column (Left Box) */}
           <div className="bg-gray-800 p-8 rounded-lg"> {/* Ignoring color, setting lighter background */}
             <div className="flex items-center mb-4">
