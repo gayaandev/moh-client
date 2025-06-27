@@ -44,7 +44,7 @@ const Spinner = () => (
   </div>
 );
 
-const PageHeader = () => {
+const PageHeader = ({ pageName }) => {
   const [menuTree, setMenuTree] = useState([]);
   const [pageContent, setPageContent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -117,12 +117,18 @@ const PageHeader = () => {
       {loading && <Spinner />}
       {/* Hero section with background image */}
       <div
-        className="relative pb-32"
+        className="relative"
         style={{
           backgroundImage: mainHeaderImage ? `url(${mainHeaderImage})` : 'none',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          minHeight: '700px'
+          minHeight: '450px', /* Adjusted height */
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+          paddingBottom: '0' /* Remove padding bottom */
         }}
       >
         {/* Site info section (top bar) */}
@@ -188,7 +194,7 @@ const PageHeader = () => {
                       {isActive ? (
                         <span
                           className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center ${
-                            isActive
+                            item.name.toUpperCase() === 'CONTACT US'
                               ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
                               : 'text-[#4988d4]'
                           }`}
@@ -246,6 +252,10 @@ const PageHeader = () => {
             </div>
           </div>
         </header>
+        {/* Page Title */}
+        <div className="relative z-20 text-white text-center" style={{ marginTop: '100px' }}> {/* Adjusted positioning */}
+          <h1 className="text-5xl font-bold">{pageName || 'Page Title'}</h1> {/* Adjusted font size */}
+        </div>
       </div>
     </div>
   );

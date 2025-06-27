@@ -5,7 +5,7 @@ import Footer from '../../components/Footer';
 const ContactPage = () => {
   return (
     <div>
-      <PageHeader />
+      <PageHeader pageName="Contact Us" />
       <main className="container mx-auto px-6 py-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Contact Us</h1>
         <p className="text-gray-700">This is the contact page content.</p>
