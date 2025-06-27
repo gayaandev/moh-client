@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { Edit3, Link as LinkIcon, ListOrdered, Layers, X } from 'lucide-react'; // Import relevant icons
-import { GET_SINGLE_MENU_ITEM_URL, UPDATE_MENU_ITEM_URL, GET_ALL_MENU_ITEMS_URL } from '../../../services/apis';
+import { GET_SINGLE_MENU_ITEM_URL, UPDATE_MENU_ITEM_URL, GET_ALL_MENU_ITEMS_URL_ADMIN } from '../../../services/apis';
 
 const MenuItemFormUpdate = ({ menuItemId, onClose }) => {
   const [menuItemData, setMenuItemData] = useState({
@@ -45,7 +45,7 @@ const MenuItemFormUpdate = ({ menuItemId, onClose }) => {
 
       // Fetch parent options
       try {
-        const parentResponse = await axios.get(GET_ALL_MENU_ITEMS_URL, {
+        const parentResponse = await axios.get(GET_ALL_MENU_ITEMS_URL_ADMIN, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setParentOptions(parentResponse.data);
