@@ -9,6 +9,7 @@ import AllMenuItemsPage from './components/admin/pages/AllMenuItemsPage'; // Imp
 import AllPages from './components/admin/pages/AllPages'; // Import AllPages
 import LoginPage from './components/admin/pages/LoginPage'; // Import LoginPage
 import UsersPage from './components/admin/pages/UsersPage'; // Import UsersPage
+import ContactPage from './components/public/pages/Contact/ContactPage'; // Import ContactPage
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext'; // Import AuthProvider and useAuth
 import PublicLayout from './components/public/components/PublicLayout';
@@ -37,6 +38,7 @@ function App() {
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
+            <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
             {/* Add other public routes here */}
 
             {/* Admin Login Route */}

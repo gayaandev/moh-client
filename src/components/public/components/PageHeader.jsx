@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom'; // Import Link and useLocation
-import mohLogo from '../../../../assets/moh-logo.png';
+import mohLogo from '../../../assets/moh-logo.png';
 import { LogIn, Phone, Mail } from 'lucide-react';
-import SectionRenderer from '../SectionRenderer';
-import { GET_ALL_MENU_ITEMS_URL, GET_PAGE_BY_SLUG_PUBLI_URL } from '../../../../services/apis';
+import { GET_ALL_MENU_ITEMS_URL, GET_PAGE_BY_SLUG_PUBLI_URL } from '../../../services/apis';
 
 // Lucide icon components
 const FacebookIcon = () => (
@@ -45,11 +44,12 @@ const Spinner = () => (
   </div>
 );
 
-const MainHeader = () => {
+const PageHeader = () => {
   const [menuTree, setMenuTree] = useState([]);
   const [pageContent, setPageContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const location = useLocation(); // Get current location for active menu highlighting
 
   useEffect(() => {
     const fetchData = async () => {
@@ -112,13 +112,6 @@ const MainHeader = () => {
   // Get the background image from the main-header section
   const mainHeaderImage = mainHeaderSection?.columns?.column1?.images?.[0];
   
-  // Get the content from the main-header section
-  const headerContent = mainHeaderSection?.columns?.column1?.content?.split('\n') || [];
-
-  // Get management section
-  const managementSection = pageContent?.section_assigned_ids
-    ?.find(section => section.section?.section_type === 'homepage')?.section;
-
   return (
     <div className="min-h-screen flex flex-col">
       {loading && <Spinner />}
@@ -192,23 +185,38 @@ const MainHeader = () => {
 
                   return (
                     <li key={item._id} className="relative group">
-                      <Link
-                        to={itemPath}
-                        className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center ${
-                          item.name.toUpperCase() === 'CONTACT US'
-                            ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
-                            : isActive
-                              ? 'text-[#4988d4]'
+                      {isActive ? (
+                        <span
+                          className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center ${
+                            isActive
+                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
+                              : 'text-[#4988d4]'
+                          }`}
+                        >
+                          {item.name}
+                          {item.children.length > 0 && (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          )}
+                        </span>
+                      ) : (
+                        <Link
+                          to={itemPath}
+                          className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center ${
+                            item.name.toUpperCase() === 'CONTACT US'
+                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
                               : 'text-gray-700 hover:text-[#4988d4]'
-                        }`}
-                      >
-                        {item.name}
-                        {item.children.length > 0 && (
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                          </svg>
-                        )}
-                      </Link>
+                          }`}
+                        >
+                          {item.name}
+                          {item.children.length > 0 && (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          )}
+                        </Link>
+                      )}
                       {item.children.length > 0 && (
                         <div className="absolute left-0 mt-1 w-max rounded-md shadow-lg bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
                           <ul className="py-1">
@@ -238,40 +246,9 @@ const MainHeader = () => {
             </div>
           </div>
         </header>
-
-        {/* Hero content */}
-        {mainHeaderSection && (
-          <div className="w-full lg:w-4/5 mx-auto px-6 pt-48 pb-32 relative z-10 text-white">
-            <div className="max-w-3xl">
-              {headerContent.map((line, index) => (
-                <h1 key={index} className={`${index === 0 ? 'text-5xl text-white' : 'text-6xl'} font-bold ${index > 0 ? 'mt-2' : 'mb-4'}`}>
-                  {line}
-                </h1>
-              ))}
-              
-              <div className="mt-8 flex flex-wrap gap-4">
-                {mainHeaderSection.columns.column2.content && (
-                  <a href="#learn-more" className="bg-white text-green-800 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium">
-                    {mainHeaderSection.columns.column2.content}
-                  </a>
-                )}
-                <a href="#reports" className="border border-white text-white hover:bg-white hover:text-green-800 px-6 py-3 rounded-lg font-medium transition-colors">
-                  See Our Reports
-                </a>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Management section */}
-        {managementSection && (
-          <div className="absolute -bottom-48 left-1/2 -translate-x-1/2 w-full lg:w-4/5 z-20">
-            <SectionRenderer section={managementSection} />
-          </div>
-        )}
       </div>
     </div>
   );
 };
 
-export default MainHeader;
+export default PageHeader;
