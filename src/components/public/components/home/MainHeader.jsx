@@ -187,6 +187,7 @@ const MainHeader = () => {
                 {menuTree.map((item) => {
                   const itemPath = item.name.toLowerCase() === 'home' ? '/' :
                                    item.name.toLowerCase() === 'contact us' ? '/contact' :
+                                   item.name.toLowerCase().includes('kmti') ? '/kmti' :
                                    `/${item.name.toLowerCase().replace(/\s/g, '-')}`;
                   const isActive = location.pathname === itemPath;
 
@@ -214,7 +215,7 @@ const MainHeader = () => {
                           <ul className="py-1">
                             {item.children.map((child) => (
                               <li key={child._id}>
-                                <Link to={`/${child.name.toLowerCase().replace(/\s/g, '-')}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <Link to={child.name.toLowerCase().includes('kmti') ? '/kmti' : `/${child.name.toLowerCase().replace(/\s/g, '-')}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                   {child.name}
                                 </Link>
                               </li>
