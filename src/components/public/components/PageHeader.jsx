@@ -172,7 +172,7 @@ const PageHeader = ({ pageName }) => {
             {/* Logo and ministry name */}
             <div className="flex items-center">
               <img src={mohLogo} alt="Ministry of Health Logo" className="h-16 w-auto" />
-              <div className="ml-3 text-sm font-medium text-blue-900 leading-tight">
+              <div className="ml-3 text-sm font-medium text-blue-900 leading-tight text-left">
                 <div>Ministry Of Health</div>
                 <div>Jubaland Sate Of</div>
                 <div>Somalia</div>
@@ -193,11 +193,7 @@ const PageHeader = ({ pageName }) => {
                     <li key={item._id} className="relative group">
                       {isActive ? (
                         <span
-                          className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center ${
-                            item.name.toUpperCase() === 'CONTACT US'
-                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
-                              : 'text-[#4988d4]'
-                          }`}
+                          className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center bg-[#4988D4] text-white`}
                         >
                           {item.name}
                           {item.children.length > 0 && (
@@ -209,11 +205,7 @@ const PageHeader = ({ pageName }) => {
                       ) : (
                         <Link
                           to={itemPath}
-                          className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center ${
-                            item.name.toUpperCase() === 'CONTACT US'
-                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
-                              : 'text-gray-700 hover:text-[#4988d4]'
-                          }`}
+                          className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center text-gray-700 hover:text-[#4988d4]`}
                         >
                           {item.name}
                           {item.children.length > 0 && (
