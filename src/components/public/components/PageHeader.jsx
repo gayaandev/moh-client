@@ -173,7 +173,7 @@ const PageHeader = ({ pageName }) => {
             </div>
           </div>
         )}
-        <div className="absolute inset-0 bg-blue-900 opacity-50 z-0"></div>
+        <div className="absolute inset-0 bg-blue-900 opacity-75 z-0"></div>
         {/* Main header */}
         <header className="absolute top-12 left-1/2 -translate-x-1/2 w-full lg:w-4/5 bg-white shadow-md rounded-lg z-30">
           <div className="px-6 py-3 flex justify-between items-center">
@@ -221,7 +221,7 @@ const PageHeader = ({ pageName }) => {
                         )}
                       </Link>
                       {item.children.length > 0 && (
-                        <div className="absolute left-0 mt-1 w-max rounded-md shadow-lg bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
+                        <div className="absolute left-0 mt-1 w-max rounded-md shadow-lg bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 text-left">
                           <ul className="py-1">
                             {item.children.map((child) => (
                               <li key={child._id}>
