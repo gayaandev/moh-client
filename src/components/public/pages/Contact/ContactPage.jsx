@@ -63,7 +63,7 @@ const ContactPage = () => {
             <h2 className="text-3xl font-bold text-gray-800 mb-6">Our Location</h2>
             <div className="aspect-w-16 aspect-h-9">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6243.813638792903!2d42.55130138525564!3d-0.3445009537357563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sso!4v1751012736806!5m2!1sen!2sso"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7979.492400086134!2d42.551301!3d-0.344501!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1802d3a4c2cc8ed5%3A0xcd42bb77f4c3004a!2sWasaaradda%20Caafimaadka%20Jubaland!5e0!3m2!1sen!2sso!4v1751013564065!5m2!1sen!2sso"
                 width="100%"
                 height="450"
                 style={{ border: 0 }}
