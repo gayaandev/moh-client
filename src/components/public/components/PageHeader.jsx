@@ -113,7 +113,7 @@ const PageHeader = ({ pageName }) => {
   const mainHeaderImage = mainHeaderSection?.columns?.column1?.images?.[0];
   
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col">
       {loading && <Spinner />}
       {/* Hero section with background image */}
       <div
