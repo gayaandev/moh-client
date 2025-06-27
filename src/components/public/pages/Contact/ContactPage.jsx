@@ -7,7 +7,7 @@ const ContactPage = () => {
   return (
     <div>
       <PageHeader pageName="Contact Us" />
-      <main className="container mx-auto px-6 py-12">
+      <main className="container mx-auto px-6 py-12 w-full lg:w-4/5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div className="bg-white p-8 rounded-lg shadow-lg">
@@ -92,6 +92,7 @@ const ContactPage = () => {
           </div>
         </div>
       </main>
+      <Footer/>
     </div>
   );
 };

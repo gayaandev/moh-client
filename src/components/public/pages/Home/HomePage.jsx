@@ -3,6 +3,7 @@ import MainHeader from '../../components/home/MainHeader';
 import AboutMinistryHomepage from '../../components/home/AboutMinistryHomepage';
 import Services from '../../components/home/Services';
 import OurPartnersHomepage from '../../components/home/OurPartnersHomepage';
+import Footer from '../../components/Footer';
 
 const HomePage = () => {
   return (
@@ -11,6 +12,7 @@ const HomePage = () => {
       <AboutMinistryHomepage />
       <Services />
       <OurPartnersHomepage />
+      <Footer/>
     </div>
   );
 };

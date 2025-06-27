@@ -8,9 +8,6 @@ const PublicLayout = ({ children }) => {
       <main className="flex-grow">
         {children}
       </main>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };
