@@ -45,6 +45,14 @@ const Spinner = () => (
   </div>
 );
 
+const generateSlug = (name) => {
+  return name.toLowerCase()
+             .replace(/[^a-z0-9]/g, ' ') // Replace non-alphanumeric characters with space
+             .trim() // Trim leading/trailing spaces
+             .replace(/\s+/g, '-') // Replace spaces with single hyphens
+             .replace(/-+/g, '-'); // Collapse multiple hyphens
+};
+
 const MainHeader = () => {
   const [menuTree, setMenuTree] = useState([]);
   const [pageContent, setPageContent] = useState(null);
@@ -188,7 +196,8 @@ const MainHeader = () => {
                   const itemPath = item.name.toLowerCase() === 'home' ? '/' :
                                    item.name.toLowerCase() === 'contact us' ? '/contact' :
                                    item.name.toLowerCase().includes('kmti') ? '/kmti' :
-                                   `/${item.name.toLowerCase().replace(/\s/g, '-')}`;
+                                   (item.children.length > 0 && item.name.toLowerCase() === 'institutions') ? '#' :
+                                   `/${generateSlug(item.name)}`;
                   const isActive = location.pathname === itemPath;
 
                   return (
@@ -215,7 +224,7 @@ const MainHeader = () => {
                           <ul className="py-1">
                             {item.children.map((child) => (
                               <li key={child._id}>
-                                <Link to={child.name.toLowerCase().includes('kmti') ? '/kmti' : `/${child.name.toLowerCase().replace(/\s/g, '-')}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <Link to={child.name.toLowerCase().includes('kmti') ? '/kmti' : `/${generateSlug(child.name)}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                   {child.name}
                                 </Link>
                               </li>
