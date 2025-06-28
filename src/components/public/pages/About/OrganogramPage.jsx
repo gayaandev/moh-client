@@ -35,19 +35,23 @@ const OrganogramPage = () => {
     fetchOrganogramData();
   }, []);
 
-  if (loading) {
-    return <PublicLayout><div className="text-center py-8">Loading...</div></PublicLayout>;
-  }
-
   if (error) {
-    return <PublicLayout><div className="text-center py-8 text-red-500">Error: {error}</div></PublicLayout>;
+    return (
+      <PublicLayout>
+        <PageHeader pageName="Organogram" />
+        <div className="container mx-auto p-4 w-full lg:w-4/5 text-center text-red-500">Error: {error}</div>
+        <Footer />
+      </PublicLayout>
+    );
   }
 
   return (
     <PublicLayout>
       <PageHeader pageName="Organogram" />
       <div className="container mx-auto p-4 w-full lg:w-4/5 flex justify-center">
-        {organogramImage ? (
+        {loading ? (
+          <div className="text-center py-8">Loading organogram...</div>
+        ) : organogramImage ? (
           <img src={organogramImage} alt="Ministry Organogram" className="max-w-full h-auto" />
         ) : (
           <p className="text-lg">Organogram image not available.</p>
