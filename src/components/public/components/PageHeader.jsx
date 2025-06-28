@@ -203,25 +203,46 @@ const PageHeader = ({ pageName }) => {
 
                   return (
                     <li key={item._id} className="relative group">
-                      <Link
-                        to={itemPath}
-                        className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center ${
-                          item.name.toUpperCase() === 'CONTACT US'
-                            ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
-                            : ''
-                        } ${
-                          isActive
-                            ? 'text-[#4988d4]'
-                            : 'text-gray-700 hover:text-[#4988d4]'
-                        }`}
-                      >
-                        {item.name}
-                        {item.children.length > 0 && (
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                          </svg>
-                        )}
-                      </Link>
+                      {item.name.toLowerCase() === 'about us' ? (
+                        <span
+                          className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center ${
+                            item.name.toUpperCase() === 'CONTACT US'
+                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
+                              : ''
+                          } ${
+                            isActive
+                              ? 'text-[#4988d4]'
+                              : 'text-gray-700 hover:text-[#4988d4]'
+                          }`}
+                        >
+                          {item.name}
+                          {item.children.length > 0 && (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          )}
+                        </span>
+                      ) : (
+                        <Link
+                          to={itemPath}
+                          className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center ${
+                            item.name.toUpperCase() === 'CONTACT US'
+                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
+                              : ''
+                          } ${
+                            isActive
+                              ? 'text-[#4988d4]'
+                              : 'text-gray-700 hover:text-[#4988d4]'
+                          }`}
+                        >
+                          {item.name}
+                          {item.children.length > 0 && (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          )}
+                        </Link>
+                      )}
                       {item.children.length > 0 && (
                         <div className="absolute left-0 mt-1 w-max rounded-md shadow-lg bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 text-left">
                           <ul className="py-1">
