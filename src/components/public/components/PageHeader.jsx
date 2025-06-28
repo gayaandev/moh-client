@@ -194,9 +194,11 @@ const PageHeader = ({ pageName }) => {
                 {menuTree.map((item) => {
                   const itemPath = item.name.toLowerCase() === 'home' ? '/' :
                                    item.name.toLowerCase() === 'contact us' ? '/contact' :
-                                   item.name.toLowerCase() === 'kismayo midwifery training institute (kmti)' ? '/kmti' :
+                                   item.name.toLowerCase().includes('kmti') ? '/kmti' :
+                                   item.name.toLowerCase() === 'overview' ? '/overview' : // Added specific path for Overview
+                                   item.name.toLowerCase() === 'organogram' ? '/organogram' : // Added specific path for Organogram
                                    (item.children.length > 0 && item.name.toLowerCase() === 'institutions') ? '#' :
-                                   `/${item.name.toLowerCase().replace(/\s/g, '-')}`;
+                                   `/${generateSlug(item.name)}`;
                   const isActive = location.pathname === itemPath;
 
                   return (

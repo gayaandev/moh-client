@@ -11,6 +11,8 @@ import LoginPage from './components/admin/pages/LoginPage'; // Import LoginPage
 import UsersPage from './components/admin/pages/UsersPage'; // Import UsersPage
 import ContactPage from './components/public/pages/Contact/ContactPage'; // Import ContactPage
 import KMTIPage from './components/public/pages/KMTI/KMTIPage'; // Import KMTIPage
+import OverviewPage from './components/public/pages/About/OverviewPage'; // Import OverviewPage
+import OrganogramPage from './components/public/pages/About/OrganogramPage'; // Import OrganogramPage
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext'; // Import AuthProvider and useAuth
 import PublicLayout from './components/public/components/PublicLayout';
@@ -41,6 +43,8 @@ function App() {
             <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
             <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
             <Route path="/kmti" element={<PublicLayout><KMTIPage /></PublicLayout>} />
+            <Route path="/overview" element={<PublicLayout><OverviewPage /></PublicLayout>} />
+            <Route path="/organogram" element={<PublicLayout><OrganogramPage /></PublicLayout>} />
             {/* Add other public routes here */}
 
             {/* Admin Login Route */}

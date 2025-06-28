@@ -196,6 +196,7 @@ const MainHeader = () => {
                   const itemPath = item.name.toLowerCase() === 'home' ? '/' :
                                    item.name.toLowerCase() === 'contact us' ? '/contact' :
                                    item.name.toLowerCase().includes('kmti') ? '/kmti' :
+                                   item.name.toLowerCase() === 'about us' ? '/about' : // Added specific path for About Us
                                    (item.children.length > 0 && item.name.toLowerCase() === 'institutions') ? '#' :
                                    `/${generateSlug(item.name)}`;
                   const isActive = location.pathname === itemPath;
