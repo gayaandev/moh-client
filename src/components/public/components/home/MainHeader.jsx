@@ -176,7 +176,7 @@ const MainHeader = () => {
         )}
         <div className="absolute inset-0 bg-blue-900 opacity-50 z-0"></div>
         {/* Main header */}
-        <header className="absolute top-12 left-1/2 -translate-x-1/2 w-full lg:w-4/5 bg-white shadow-md rounded-lg z-30">
+        <header className="absolute top-4 md:top-12 left-1/2 -translate-x-1/2 w-full lg:w-4/5 bg-white shadow-md rounded-lg z-30">
           <div className="px-6 py-3 flex justify-between items-center">
             {/* Logo and ministry name */}
             <div className="flex items-center">
@@ -191,7 +191,7 @@ const MainHeader = () => {
             
             {/* Navigation */}
             <nav className="hidden md:block">
-              <ul className="flex space-x-1 items-center">
+              <ul className="flex space-x-1 items-center text-xs md:text-sm"> {/* Adjusted font size for responsiveness */}
                 {menuTree.map((item) => {
                   const itemPath = item.name.toLowerCase() === 'home' ? '/' :
                                    item.name.toLowerCase() === 'contact us' ? '/contact' :
@@ -205,7 +205,7 @@ const MainHeader = () => {
                     <li key={item._id} className="relative group">
                       {item.name.toLowerCase() === 'about us' ? (
                         <span
-                          className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center ${
+                          className={`px-2 py-1 md:px-3 md:py-2 rounded-md font-medium uppercase flex items-center ${
                             item.name.toUpperCase() === 'CONTACT US'
                               ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
                               : ''
@@ -217,7 +217,7 @@ const MainHeader = () => {
                         >
                           {item.name}
                           {item.children.length > 0 && (
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 md:h-4 md:w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                             </svg>
                           )}
@@ -225,7 +225,7 @@ const MainHeader = () => {
                       ) : (
                         <Link
                           to={itemPath}
-                          className={`px-3 py-2 rounded-md text-sm font-medium uppercase flex items-center ${
+                          className={`px-2 py-1 md:px-3 md:py-2 rounded-md font-medium uppercase flex items-center ${
                             item.name.toUpperCase() === 'CONTACT US'
                               ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
                               : ''
@@ -237,7 +237,7 @@ const MainHeader = () => {
                         >
                           {item.name}
                           {item.children.length > 0 && (
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 md:h-4 md:w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                             </svg>
                           )}
@@ -248,7 +248,7 @@ const MainHeader = () => {
                           <ul className="py-1">
                             {item.children.map((child) => (
                               <li key={child._id}>
-                                <Link to={child.name.toLowerCase().includes('kmti') ? '/kmti' : `/${generateSlug(child.name)}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <Link to={child.name.toLowerCase().includes('kmti') ? '/kmti' : `/${generateSlug(child.name)}`} className="block px-4 py-2 text-xs md:text-sm text-gray-700 hover:bg-gray-100">
                                   {child.name}
                                 </Link>
                               </li>
@@ -275,7 +275,7 @@ const MainHeader = () => {
 
         {/* Hero content */}
         {mainHeaderSection && (
-          <div className="w-full lg:w-4/5 mx-auto px-6 pt-48 pb-32 relative z-10 text-white">
+          <div className="w-full lg:w-4/5 mx-auto px-6 pt-24 md:pt-48 pb-32 relative z-10 text-white">
             <div className="max-w-3xl">
               {headerContent.map((line, index) => (
                 <h1 key={index} className={`${index === 0 ? 'text-5xl text-white' : 'text-6xl'} font-bold ${index > 0 ? 'mt-2' : 'mb-4'}`}>
