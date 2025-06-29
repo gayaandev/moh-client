@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import mohLogo from './../../../assets/moh-logo.png';
+import siteLogo from './../../../assets/logo-site.png';
 
 const Footer = () => {
   return (
@@ -11,7 +11,7 @@ const Footer = () => {
           {/* First Column (Left Box) */}
           <div className="bg-gray-800 p-8 rounded-lg"> {/* Ignoring color, setting lighter background */}
             <div className="flex items-center mb-4">
-              <img src={mohLogo} alt="Ministry of Health Logo" className="h-16 w-auto" /> {/* Larger logo */}
+              <img src={siteLogo} alt="Ministry of Health Logo" className="h-16 w-auto" /> {/* Larger logo */}
               <div className="ml-4 text-lg font-bold text-green-500 leading-tight"> {/* Ignoring color */}
 
               </div>
