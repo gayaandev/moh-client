@@ -175,22 +175,16 @@ const PageHeader = ({ pageName }) => {
         )}
         <div className="absolute inset-0 bg-blue-900 opacity-75 z-0"></div>
         {/* Main header */}
-        <header className="absolute top-4 md:top-12 left-1/2 -translate-x-1/2 w-full lg:w-4/5 bg-white shadow-md rounded-lg z-30">
+        <header className="absolute top-4 md:top-12 left-1/2 -translate-x-1/2 w-[96%] lg:w-4/5 bg-white shadow-md rounded-lg z-30">
           <div className="px-6 py-3 flex justify-between items-center">
             {/* Logo and ministry name */}
             <div className="flex items-center">
-              <img src={mohLogo} alt="Ministry of Health Logo" className="h-16 w-auto" />
-              <div className="ml-3 text-sm font-medium text-blue-900 leading-tight text-left">
-                <div>Ministry Of Health</div>
-                <div>Jubaland Sate Of</div>
-                <div>Somalia</div>
-
-              </div>
+              <img src={mohLogo} alt="Ministry of Health Logo" className="h-12 xl:h-16 w-auto" />
             </div>
             
             {/* Navigation */}
             <nav className="hidden md:block">
-              <ul className="flex space-x-1 items-center text-xs md:text-sm"> {/* Adjusted font size for responsiveness */}
+              <ul className="flex space-x-1 items-center text-xs lg:text-sm xl:text-base"> {/* Adjusted font size for responsiveness */}
                 {menuTree.map((item) => {
                   const itemPath = item.name.toLowerCase() === 'home' ? '/' :
                                    item.name.toLowerCase() === 'contact us' ? '/contact' :
