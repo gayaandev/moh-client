@@ -40,13 +40,13 @@ const DepartmentAdminFinanceHRPage = () => {
           </div>
           {/* Right Column: Vision Text */}
           <div className="lg:w-3/5 flex flex-col space-y-4">
-            <div className="p-4 rounded-lg shadow-md">
+            <div className="p-4 rounded-lg">
               <h3 className="text-2xl font-bold mb-2">Our Vision</h3>
               <p className="text-lg text-gray-700 leading-relaxed">
                 To be a trusted steward of financial resources, a driver of operational excellence, and a strategic partner in advancing the Ministry of Health's mission to enhance health productivity, ensure health security, and foster sustainable development for the nation.
               </p>
             </div>
-            <div className="p-4 rounded-lg shadow-md">
+            <div className="p-4 rounded-lg">
               <h3 className="text-2xl font-bold mb-2">Our Vision</h3>
               <p className="text-lg text-gray-700 leading-relaxed">
                 This section can be used for additional details or a breakdown of the vision into two parts.
@@ -65,11 +65,10 @@ const DepartmentAdminFinanceHRPage = () => {
               className="w-full h-auto rounded-lg"
             />
           </div>
+        
         </div>
-      </div> {/* Closes div on line 10 */}
 
-
-
+      </div>
       <Footer />
     </PublicLayout>
   );
