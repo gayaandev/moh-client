@@ -181,12 +181,6 @@ const MainHeader = () => {
             {/* Logo and ministry name */}
             <div className="flex items-center">
               <img src={mohLogo} alt="Ministry of Health Logo" className="h-16 w-auto" />
-              <div className="ml-3 text-sm font-medium text-blue-900 leading-tight">
-                <div>Ministry Of Health</div>
-                <div>Jubaland Sate Of</div>
-                <div>Somalia</div>
-
-              </div>
             </div>
             
             {/* Navigation */}
