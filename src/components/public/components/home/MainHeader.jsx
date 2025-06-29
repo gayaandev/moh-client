@@ -191,10 +191,14 @@ const MainHeader = () => {
               <ul className="flex space-x-1 items-center text-xs md:text-sm"> {/* Adjusted font size for responsiveness */}
 
                 {menuTree.map((item) => {
+
+
+
                   const itemPath = item.name.toLowerCase() === 'home' ? '/' :
                                    item.name.toLowerCase() === 'contact us' ? '/contact' :
                                    item.name.toLowerCase().includes('kmti') ? '/kmti' :
                                    item.name.toLowerCase() === 'about us' ? '/about' : // Added specific path for About Us
+                                   item.name.toLowerCase() === 'departments' ? '#' : // Disable Departments parent link
                                    (item.children.length > 0 && item.name.toLowerCase() === 'institutions') ? '#' :
                                    `/${generateSlug(item.name)}`;
                   const isActive = location.pathname === itemPath;
@@ -206,7 +210,8 @@ const MainHeader = () => {
 
                   return (
                     <li key={item._id} className="relative group">
-                      {item.name.toLowerCase() === 'about us' ? (
+
+                      {item.name.toLowerCase() === 'about us' || item.name.toLowerCase() === 'departments' ? (
                         <span
                           className={`px-2 py-1 md:px-3 md:py-2 rounded-md font-medium uppercase flex items-center ${
                             item.name.toUpperCase() === 'CONTACT US'
