@@ -197,6 +197,8 @@ const MainHeader = () => {
                   const itemPath = item.name.toLowerCase() === 'home' ? '/' :
                                    item.name.toLowerCase() === 'contact us' ? '/contact' :
                                    item.name.toLowerCase().includes('kmti') ? '/kmti' :
+
+                                   (item.name.toLowerCase() === 'about' && item.children.length > 0) ? '#' : // Disable About Us parent link if it has children
                                    item.name.toLowerCase() === 'about us' ? '/about' : // Added specific path for About Us
                                    item.name.toLowerCase() === 'departments' ? '#' : // Disable Departments parent link
                                    (item.children.length > 0 && item.name.toLowerCase() === 'institutions') ? '#' :
@@ -211,7 +213,7 @@ const MainHeader = () => {
                   return (
                     <li key={item._id} className="relative group">
 
-                      {item.name.toLowerCase() === 'about us' || item.name.toLowerCase() === 'departments' ? (
+                      {itemPath === '#' ? (
                         <span
                           className={`px-2 py-1 md:px-3 md:py-2 rounded-md font-medium uppercase flex items-center ${
                             item.name.toUpperCase() === 'CONTACT US'
