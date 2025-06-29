@@ -179,13 +179,17 @@ const MainHeader = () => {
         <header className="absolute top-4 md:top-12 left-1/2 -translate-x-1/2 w-full lg:w-4/5 bg-white shadow-md rounded-lg z-30">
           <div className="px-6 py-3 flex justify-between items-center">
             {/* Logo and ministry name */}
+
             <div className="flex items-center">
-              <img src={mohLogo} alt="Ministry of Health Logo" className="h-16 w-auto" />
+              <Link to="/"> {/* Make logo linkable to home */}
+                <img src={mohLogo} alt="Ministry of Health Logo" className="h-16 w-auto" />
+              </Link>
             </div>
             
             {/* Navigation */}
             <nav className="hidden md:block">
               <ul className="flex space-x-1 items-center text-xs md:text-sm"> {/* Adjusted font size for responsiveness */}
+
                 {menuTree.map((item) => {
                   const itemPath = item.name.toLowerCase() === 'home' ? '/' :
                                    item.name.toLowerCase() === 'contact us' ? '/contact' :
@@ -194,6 +198,11 @@ const MainHeader = () => {
                                    (item.children.length > 0 && item.name.toLowerCase() === 'institutions') ? '#' :
                                    `/${generateSlug(item.name)}`;
                   const isActive = location.pathname === itemPath;
+
+                  // Conditionally render based on item name
+                  if (item.name.toLowerCase() === 'home') {
+                    return null; // Do not render the "Home" link
+                  }
 
                   return (
                     <li key={item._id} className="relative group">

@@ -175,25 +175,33 @@ const PageHeader = ({ pageName }) => {
         )}
         <div className="absolute inset-0 bg-blue-900 opacity-75 z-0"></div>
         {/* Main header */}
-        <header className="absolute top-4 md:top-12 left-1/2 -translate-x-1/2 w-[96%] lg:w-4/5 bg-white shadow-md rounded-lg z-30">
+        <header className="absolute top-4 md:top-12 left-1/2 -translate-x-1/2 w-full lg:w-4/5 bg-white shadow-md rounded-lg z-30">
           <div className="px-6 py-3 flex justify-between items-center">
             {/* Logo and ministry name */}
+
             <div className="flex items-center">
-              <img src={mohLogo} alt="Ministry of Health Logo" className="h-12 xl:h-16 w-auto" />
+              <Link to="/"> {/* Make logo linkable to home */}
+                <img src={mohLogo} alt="Ministry of Health Logo" className="h-16 w-auto" />
+              </Link>
             </div>
             
             {/* Navigation */}
             <nav className="hidden md:block">
-              <ul className="flex space-x-1 items-center text-xs lg:text-sm xl:text-base"> {/* Adjusted font size for responsiveness */}
+              <ul className="flex space-x-1 items-center text-xs md:text-sm"> {/* Adjusted font size for responsiveness */}
+
                 {menuTree.map((item) => {
                   const itemPath = item.name.toLowerCase() === 'home' ? '/' :
                                    item.name.toLowerCase() === 'contact us' ? '/contact' :
                                    item.name.toLowerCase().includes('kmti') ? '/kmti' :
-                                   item.name.toLowerCase() === 'overview' ? '/overview' : // Added specific path for Overview
-                                   item.name.toLowerCase() === 'organogram' ? '/organogram' : // Added specific path for Organogram
+                                   item.name.toLowerCase() === 'about us' ? '/about' : // Added specific path for About Us
                                    (item.children.length > 0 && item.name.toLowerCase() === 'institutions') ? '#' :
                                    `/${generateSlug(item.name)}`;
                   const isActive = location.pathname === itemPath;
+
+                  // Conditionally render based on item name
+                  if (item.name.toLowerCase() === 'home') {
+                    return null; // Do not render the "Home" link
+                  }
 
                   return (
                     <li key={item._id} className="relative group">
