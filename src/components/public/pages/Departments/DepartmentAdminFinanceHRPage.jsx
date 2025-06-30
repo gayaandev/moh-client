@@ -33,9 +33,9 @@ const DepartmentAdminFinanceHRPage = () => {
           {/* Left Column: Image */}
           <div className="lg:w-2/5 mb-8 lg:mb-0">
             <img
-              src="https://moh-assets.nyc3.cdn.digitaloceanspaces.com/a35d6c42-4521-43f2-8c5e-312bc8370c6a.jpeg"
+              src="https://moh-assets.nyc3.cdn.digitaloceanspaces.com/506e3710-d918-495e-8c08-281e84a46137.webp"
               alt="Our Vision"
-              className="w-full h-auto rounded-lg shadow-md"
+              className="w-full h-auto rounded-lg"
             />
           </div>
           {/* Right Column: Vision Text */}
