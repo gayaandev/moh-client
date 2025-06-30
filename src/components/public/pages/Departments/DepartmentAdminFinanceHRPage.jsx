@@ -175,7 +175,7 @@ const DepartmentAdminFinanceHRPage = () => {
           <div className="w-24 h-1 bg-[#6DA2D5] mx-auto mb-6"></div>
           <div className="flex justify-center">
             <img
-              src="https://moh-assets.nyc3.cdn.digitaloceanspaces.com/8e6931da-1b49-4eb0-a57c-e799f317a5c0.webp"
+              src="https://moh-assets.nyc3.cdn.digitaloceanspaces.com/d2034804-fe96-49b5-b7f8-ed474c91605a.png"
               alt="Organizational Chart"
               className="w-full h-auto rounded-lg"
             />
