@@ -188,7 +188,7 @@ const MainHeader = () => {
             
             {/* Navigation */}
             <nav className="hidden md:block">
-              <ul className="flex space-x-1 items-center text-xs md:text-sm"> {/* Adjusted font size for responsiveness */}
+              <ul className="flex items-center text-xs md:text-sm gap-x-4">
 
                 {menuTree.map((item) => {
 
@@ -215,9 +215,9 @@ const MainHeader = () => {
 
                       {itemPath === '#' ? (
                         <span
-                          className={`px-2 py-1 md:px-3 md:py-2 rounded-md font-medium uppercase flex items-center ${
+                          className={`py-1 rounded-md font-medium uppercase flex items-center ${
                             item.name.toUpperCase() === 'CONTACT US'
-                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
+                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white px-2 md:px-3'
                               : ''
                           } ${
                             isActive
@@ -235,9 +235,9 @@ const MainHeader = () => {
                       ) : (
                         <Link
                           to={itemPath}
-                          className={`px-2 py-1 md:px-3 md:py-2 rounded-md font-medium uppercase flex items-center ${
+                          className={`py-1 rounded-md font-medium uppercase flex items-center ${
                             item.name.toUpperCase() === 'CONTACT US'
-                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white'
+                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white px-2 md:px-3'
                               : ''
                           } ${
                             isActive
