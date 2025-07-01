@@ -47,8 +47,8 @@ function App() {
             <Route path="/kmti" element={<PublicLayout><KMTIPage /></PublicLayout>} />
             <Route path="/overview" element={<PublicLayout><OverviewPage /></PublicLayout>} />
             <Route path="/organogram" element={<PublicLayout><OrganogramPage /></PublicLayout>} />
-            <Route path="/department-admin-finance-and-hr" element={<PublicLayout><DepartmentAdminFinanceHRPage /></PublicLayout>} />
-            <Route path="/department-medical-service" element={<PublicLayout><DepartmentMedicalServicePage /></PublicLayout>} />
+            <Route path="/department-of-admin-finance-and-hr" element={<PublicLayout><DepartmentAdminFinanceHRPage /></PublicLayout>} />
+            <Route path="/department-of-medical-service" element={<PublicLayout><DepartmentMedicalServicePage /></PublicLayout>} />
             {/* Add other public routes here */}
 
             {/* Admin Login Route */}
