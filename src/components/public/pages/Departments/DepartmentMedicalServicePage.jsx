@@ -64,7 +64,7 @@ const DepartmentMedicalServicePage = () => {
   if (loading) {
     return (
       <PublicLayout>
-        <PageHeader pageName="Department Medical Service" />
+        <PageHeader pageName="Medical service Department" />
         <div className="container mx-auto p-4 w-full lg:w-4/5 text-center">Loading department content...</div>
         <Footer />
       </PublicLayout>
@@ -74,7 +74,7 @@ const DepartmentMedicalServicePage = () => {
   if (error) {
     return (
       <PublicLayout>
-        <PageHeader pageName="Department Medical Service" />
+        <PageHeader pageName="Medical service Department" />
         <div className="container mx-auto p-4 w-full lg:w-4/5 text-center text-red-500">Error: {error}</div>
         <Footer />
       </PublicLayout>
