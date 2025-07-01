@@ -91,7 +91,7 @@ const DepartmentMedicalServicePage = () => {
 
   return (
     <PublicLayout>
-      <PageHeader pageName="Department Medical Service" />
+      <PageHeader pageName="Medical service Department" />
       <div className="container mx-auto p-4 w-full lg:w-4/5">
         {departmentSection1 && (
           <>

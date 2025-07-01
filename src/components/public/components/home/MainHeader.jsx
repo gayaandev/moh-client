@@ -288,21 +288,11 @@ const MainHeader = () => {
           <div className="w-full lg:w-4/5 mx-auto px-6 pt-24 md:pt-48 pb-32 relative z-10 text-white">
             <div className="max-w-3xl">
               {headerContent.map((line, index) => (
-                <h1 key={index} className={`${index === 0 ? 'text-5xl text-white' : 'text-6xl'} font-bold ${index > 0 ? 'mt-2' : 'mb-4'}`}>
+                <h1 key={index} className={`${index === 0 ? 'text-5xl' : 'text-6xl'} font-bold ${index > 0 ? 'mt-2' : 'mb-4'}`} style={index === 0 ? {color: '#a7d0ff'} : {}}>
                   {line}
                 </h1>
               ))}
               
-              <div className="mt-8 flex flex-wrap gap-4">
-                {mainHeaderSection.columns.column2.content && (
-                  <a href="#learn-more" className="bg-white text-green-800 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium">
-                    {mainHeaderSection.columns.column2.content}
-                  </a>
-                )}
-                <a href="#reports" className="border border-white text-white hover:bg-white hover:text-green-800 px-6 py-3 rounded-lg font-medium transition-colors">
-                  See Our Reports
-                </a>
-              </div>
             </div>
           </div>
         )}
