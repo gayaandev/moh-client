@@ -181,32 +181,37 @@ const DepartmentMedicalServicePage = () => {
 
             {/* Section 3: Duties and Responsibilities */}
             <div className="mt-12 mb-12">
-              {departmentSection1.columns?.column3?.content && (() => {
-                const parsedSections = parseContent(departmentSection1.columns.column3.content);
-                return (
-                  <>
-                    {parsedSections.mainTitle && (
-                      <>
-                        <h2 className="text-4xl font-bold mb-4 text-center text-[#6DA2D5]">{parsedSections.mainTitle}</h2>
-                        <div className="w-24 h-1 bg-[#6DA2D5] mx-auto mb-6"></div>
-                      </>
-                    )}
-                    <div className="flex flex-col lg:flex-row lg:space-x-8">
-                      {/* Left Column */}
-                      <div className="lg:w-1/2 relative border-l-2 border-gray-200 pl-8 mb-8 lg:mb-0">
-                        {parsedSections.Director && renderSection("Director", parsedSections.Director)}
-                        {parsedSections.Admin && renderSection("Admin", parsedSections.Admin)}
+              {departmentSection1.columns?.column3?.content && (
+                (() => {
+                  const rawContent = departmentSection1.columns.column3.content.replace(/\\n/g, '\n'); // Replace literal \n with actual newlines
+                  const parsedSections = parseContent(rawContent);
+                  const sectionKeys = Object.keys(parsedSections).filter(key => key !== 'mainTitle');
+                  const midPoint = Math.ceil(sectionKeys.length / 2);
+                  const leftColumnKeys = sectionKeys.slice(0, midPoint);
+                  const rightColumnKeys = sectionKeys.slice(midPoint);
+
+                  return (
+                    <>
+                      {parsedSections.mainTitle && (
+                        <>
+                          <h2 className="text-4xl font-bold mb-4 text-center text-[#6DA2D5]">{parsedSections.mainTitle}</h2>
+                          <div className="w-24 h-1 bg-[#6DA2D5] mx-auto mb-6"></div>
+                        </>
+                      )}
+                      <div className="flex flex-col lg:flex-row lg:space-x-8">
+                        {/* Left Column */}
+                        <div className="lg:w-1/2 relative border-l-2 border-gray-200 pl-8 mb-8 lg:mb-0">
+                          {leftColumnKeys.map(key => renderSection(key, parsedSections[key]))}
+                        </div>
+                        {/* Right Column */}
+                        <div className="lg:w-1/2 relative border-l-2 border-gray-200 pl-8">
+                          {rightColumnKeys.map(key => renderSection(key, parsedSections[key]))}
+                        </div>
                       </div>
-                      {/* Right Column */}
-                      <div className="lg:w-1/2 relative border-l-2 border-gray-200 pl-8">
-                        {parsedSections.Finance && renderSection("Finance", parsedSections.Finance)}
-                        {parsedSections.HR && renderSection("HR", parsedSections.HR)}
-                        {parsedSections.IT && renderSection("IT", parsedSections.IT)}
-                      </div>
-                    </div>
-                  </>
-                );
-              })()}
+                    </>
+                  );
+                })()
+              )}
             </div>
           </>
         )}
