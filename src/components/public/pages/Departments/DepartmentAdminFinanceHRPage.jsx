@@ -91,7 +91,7 @@ const DepartmentAdminFinanceHRPage = () => {
 
   return (
     <PublicLayout>
-      <PageHeader pageName="Department Admin Finance and HR" />
+      <PageHeader pageName="Admin Finance and Human Resource Department" />
       <div className="container mx-auto p-4 w-full lg:w-4/5">
         {departmentSection1 && (
           <>
