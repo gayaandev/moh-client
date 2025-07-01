@@ -215,10 +215,10 @@ const MainHeader = () => {
 
                       {itemPath === '#' ? (
                         <span
-                          className={`py-1 rounded-md font-medium uppercase flex items-center ${
+                          className={`rounded-md font-medium uppercase flex items-center ${
                             item.name.toUpperCase() === 'CONTACT US'
-                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white px-2 md:px-3'
-                              : ''
+                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white px-2 md:px-3 py-2 my-2'
+                              : 'py-1'
                           } ${
                             isActive
                               ? 'text-[#4988d4]'
@@ -235,10 +235,10 @@ const MainHeader = () => {
                       ) : (
                         <Link
                           to={itemPath}
-                          className={`py-1 rounded-md font-medium uppercase flex items-center ${
+                          className={`rounded-md font-medium uppercase flex items-center ${
                             item.name.toUpperCase() === 'CONTACT US'
-                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white px-2 md:px-3'
-                              : ''
+                              ? 'bg-[#4988D4] hover:bg-[#3a70b0] text-white px-2 md:px-3 py-2 my-2'
+                              : 'py-1'
                           } ${
                             isActive
                               ? 'text-[#4988d4]'
