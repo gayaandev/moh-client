@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext'; // Import useAuth
-import mohLogo from '../../../assets/moh-logo.png'; // Import the logo
+import logoSite from '../../../assets/logo-site.png'; // Import the logo
 import {
   Home,
   Settings,
@@ -47,7 +47,7 @@ const AdminLayout = ({ children, modal }) => {
       {/* Sidebar - Modern Dark Navy */}
       <aside className="w-64 flex flex-col bg-[#1a1f2e] text-gray-100 transition-all duration-300 ease-in-out">
         <div className="p-6 text-2xl font-bold flex items-center justify-center">
-          <img src={mohLogo} alt="MOH Logo" className="h-16 w-auto" />
+          <img src={logoSite} alt="Site Logo" className="h-16 w-auto" />
         </div>
         <div className="flex-1 px-4 py-2 overflow-y-auto"> {/* Added flex-1 and overflow-y-auto */}
           <nav>
