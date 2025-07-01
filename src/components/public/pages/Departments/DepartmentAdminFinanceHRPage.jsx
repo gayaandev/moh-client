@@ -103,6 +103,8 @@ const DepartmentAdminFinanceHRPage = () => {
                   const title = lines[0].replace(/#\s*(.*?)\s*$/, '$1');
                   let contentBody = lines.slice(1).join('\n');
                   // Remove the name and title part from the content body
+                  // Remove the specific redundant text block and the name/title part
+                  // Remove the name and title part from the content body, and any preceding text that might be part of the same block
                   contentBody = contentBody.replace(/==Name and title==[\s\S]*$/, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').trim();
                   return (
                     <>

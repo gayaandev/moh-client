@@ -101,7 +101,10 @@ const DepartmentMedicalServicePage = () => {
                 {departmentSection1.columns?.column1?.content && (() => {
                   const lines = departmentSection1.columns.column1.content.split('\n');
                   const title = lines[0].replace(/#\s*(.*?)\s*$/, '$1');
-                  const contentBody = lines.slice(1).join('\n').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').trim();
+                  let contentBody = lines.slice(1).join('\n');
+                  // Remove the name and title part from the content body, and any preceding text that might be part of the same block
+                  // Remove the specific redundant text block and the name/title part
+                  contentBody = contentBody.replace(/==Name and title==[\s\S]*$/, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').trim();
                   return (
                     <>
                       {title && (
@@ -123,8 +126,19 @@ const DepartmentMedicalServicePage = () => {
                     className="w-full h-auto rounded-lg shadow-md mb-4"
                   />
                 )}
-                <h3 className="text-2xl font-semibold italic mb-1">Mohamed Abdikadir</h3>
-                <p className="text-xl italic mb-2">Director Of Admin and Finance</p>
+                {(() => {
+                  const content = departmentSection1.columns?.column1?.content;
+                  const nameTitleRegex = /==Name and title==\s*\n\s*(.*?)\s*\n\s*(.*?)\s*$/;
+                  const match = content.match(nameTitleRegex);
+                  const name = match ? match[1].trim() : '';
+                  const title = match ? match[2].trim() : '';
+                  return (
+                    <>
+                      {name && <h3 className="text-2xl font-bold mb-1">{name}</h3>}
+                      {title && <p className="text-xl italic mb-2">{title}</p>}
+                    </>
+                  );
+                })()}
               </div>
             </div>
 
