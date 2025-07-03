@@ -16,6 +16,7 @@ import OrganogramPage from './components/public/pages/About/OrganogramPage'; // 
 import DepartmentAdminFinanceHRPage from './components/public/pages/Departments/DepartmentAdminFinanceHRPage'; // Import DepartmentAdminFinanceHRPage
 import DepartmentMedicalServicePage from './components/public/pages/Departments/DepartmentMedicalServicePage'; // Import DepartmentMedicalServicePage
 import DepartmentHealthEmergencyPage from './components/public/pages/Departments/DepartmentHealthEmergencyPage'; // Import DepartmentHealthEmergencyPage
+import DepartmentFamilyHealthPage from './components/public/pages/Departments/DepartmentFamilyHealthPage'; // Import DepartmentFamilyHealthPage
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext'; // Import AuthProvider and useAuth
 import PublicLayout from './components/public/components/PublicLayout';
@@ -51,6 +52,7 @@ function App() {
             <Route path="/admin-finance-and-human-resource-department" element={<PublicLayout><DepartmentAdminFinanceHRPage /></PublicLayout>} />
             <Route path="/medical-service-department" element={<PublicLayout><DepartmentMedicalServicePage /></PublicLayout>} />
             <Route path="/health-emergency-department" element={<PublicLayout><DepartmentHealthEmergencyPage /></PublicLayout>} />
+            <Route path="/family-health-department" element={<PublicLayout><DepartmentFamilyHealthPage /></PublicLayout>} />
             {/* Add other public routes here */}
 
             {/* Admin Login Route */}

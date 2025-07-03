@@ -4,7 +4,7 @@ import PageHeader from '../../components/PageHeader';
 import Footer from '../../components/Footer';
 import { GET_PAGE_BY_SLUG_PUBLI_URL } from '../../../../services/apis';
 
-const DepartmentHealthEmergencyPage = () => {
+const DepartmentFamilyHealthPage = () => {
   const [pageContent, setPageContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,7 +12,7 @@ const DepartmentHealthEmergencyPage = () => {
   useEffect(() => {
     const fetchPageContent = async () => {
       try {
-        const response = await fetch(GET_PAGE_BY_SLUG_PUBLI_URL('health-emergency-department'), {
+        const response = await fetch(GET_PAGE_BY_SLUG_PUBLI_URL('family-health-department'), {
           headers: { 'X-API-Key': import.meta.env.VITE_X_API_KEY },
         });
         if (!response.ok) {
@@ -64,7 +64,7 @@ const DepartmentHealthEmergencyPage = () => {
   if (loading) {
     return (
       <PublicLayout>
-        <PageHeader pageName="Family-Health-Department" />
+        <PageHeader pageName="Family Health Department" />
         <div className="container mx-auto p-4 w-full lg:w-4/5 text-center">Loading department content...</div>
         <Footer />
       </PublicLayout>
@@ -74,7 +74,7 @@ const DepartmentHealthEmergencyPage = () => {
   if (error) {
     return (
       <PublicLayout>
-        <PageHeader pageName="Family-Health-Department" />
+        <PageHeader pageName="Family Health Department" />
         <div className="container mx-auto p-4 w-full lg:w-4/5 text-center text-red-500">Error: {error}</div>
         <Footer />
       </PublicLayout>
@@ -91,7 +91,7 @@ const DepartmentHealthEmergencyPage = () => {
 
   return (
     <PublicLayout>
-      <PageHeader pageName="Health Emmergency Department" />
+      <PageHeader pageName="Family Health Department" />
       <div className="container mx-auto p-4 w-full lg:w-4/5">
         {departmentSection1 && (
           <>
@@ -255,4 +255,5 @@ const DepartmentHealthEmergencyPage = () => {
     </PublicLayout>
   );
 };
-export default DepartmentHealthEmergencyPage;
+
+export default DepartmentFamilyHealthPage;
