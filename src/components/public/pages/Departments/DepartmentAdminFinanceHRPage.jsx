@@ -12,7 +12,7 @@ const DepartmentHealthEmergencyPage = () => {
   useEffect(() => {
     const fetchPageContent = async () => {
       try {
-        const response = await fetch(GET_PAGE_BY_SLUG_PUBLI_URL('health-emergency-department'), {
+        const response = await fetch(GET_PAGE_BY_SLUG_PUBLI_URL('department_admin_finance_hr'), {
           headers: { 'X-API-Key': import.meta.env.VITE_X_API_KEY },
         });
         if (!response.ok) {
@@ -82,11 +82,11 @@ const DepartmentHealthEmergencyPage = () => {
   }
 
   const departmentSection1 = pageContent?.section_assigned_ids?.find(
-    (section) => section.section?.section_type === 'Family-Health-Department'
+    (section) => section.section?.section_type === 'department_admin_finance_hr'
   )?.section;
 
   const departmentSection2 = pageContent?.section_assigned_ids?.find(
-    (section) => section.section?.section_type === 'Family-Health-Department2'
+    (section) => section.section?.section_type === 'department_admin_finance_hr2'
   )?.section;
 
   return (
