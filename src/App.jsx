@@ -19,6 +19,8 @@ import DepartmentHealthEmergencyPage from './components/public/pages/Departments
 import DepartmentFamilyHealthPage from './components/public/pages/Departments/DepartmentFamilyHealthPage'; // Import DepartmentFamilyHealthPage
 import DepartmentPublicHealthPage from './components/public/pages/Departments/DepartmentPublicHealthPage'; // Import DepartmentPublicHealthPage
 import DepartmentMentalHealthPage from './components/public/pages/Departments/DepartmentMentalHealthPage'; // Import DepartmentMentalHealthPage
+import DamalCaafimadPage from './components/public/pages/Departments/projects/DamalCaafimadPage';
+import MarwoCaafimaadPage from './components/public/pages/Departments/projects/MarwoCaafimaadPage';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext'; // Import AuthProvider and useAuth
 import PublicLayout from './components/public/components/PublicLayout';
@@ -57,6 +59,8 @@ function App() {
             <Route path="/family-health-department" element={<PublicLayout><DepartmentFamilyHealthPage /></PublicLayout>} />
             <Route path="/public-health-department" element={<PublicLayout><DepartmentPublicHealthPage /></PublicLayout>} />
             <Route path="/mental-health-department" element={<PublicLayout><DepartmentMentalHealthPage /></PublicLayout>} />
+            <Route path="/damal-caafimaad" element={<PublicLayout><DamalCaafimadPage /></PublicLayout>} />
+            <Route path="/marwo-caafimaad" element={<PublicLayout><MarwoCaafimaadPage /></PublicLayout>} />
             {/* Add other public routes here */}
 
             {/* Admin Login Route */}
