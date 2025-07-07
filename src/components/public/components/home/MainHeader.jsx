@@ -145,15 +145,15 @@ const MainHeader = () => {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full lg:w-4/5 z-40 text-white text-xs">
             <div className="container mx-auto px-6 py-2 flex justify-between items-center">
               <div className="flex space-x-2 items-center">
-                {siteInfoSection.columns.column1.content.split('\n').map((line, index, array) => (
-                  <React.Fragment key={index}>
-                    <span className="flex items-center">
-                      {line.includes('@') ? <Mail className="w-4 h-4 mr-1" /> : <Phone className="w-4 h-4 mr-1" />}
-                      {line}
-                    </span>
-                    {index < array.length - 1 && <span className="opacity-50">|</span>}
-                  </React.Fragment>
-                ))}
+                <span className="flex items-center">
+                  <Phone className="w-4 h-4 mr-1" />
+                  (+252)612031998
+                </span>
+                <span className="opacity-50">|</span>
+                <span className="flex items-center">
+                  <Mail className="w-4 h-4 mr-1" />
+                  info@mohjubalandstate.so
+                </span>
               </div>
               <div className="flex space-x-4 items-center">
                 <div className="flex space-x-3">

@@ -59,9 +59,8 @@ const Footer = () => {
             <div className="w-16 h-1 bg-white mb-6"></div> {/* Underline */}
             <p className="text-gray-400 space-y-2"> {/* Ignoring color */}
               Kismayo<br />
-              info@jubalandstate.so<br />
-              +252 (61) 0 000 000<br />
-              +252 (61) 0 000 000
+              info@mohjubalandstate.so<br />
+              (+252)61581639<br />
             </p>
           </div>
 
