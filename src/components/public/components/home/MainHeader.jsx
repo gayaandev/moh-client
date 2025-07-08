@@ -261,23 +261,44 @@ const MainHeader = () => {
                               const isPortal = [
                                 'asset-register-system',
                                 'health-facility-registration-system',
-                                'health-professional-registry-system'
+                                'health-professional-registry-system',
+                                'ihrm-software',
+                                'dhis2'
                               ].includes(childSlug);
 
-                              const path = child.name.toLowerCase().includes('kmti')
+                              let path = child.name.toLowerCase().includes('kmti')
                                 ? '/kmti'
                                 : `/${childSlug}`;
 
+                              if (childSlug === 'ihrm-software') {
+                                path = 'https://jsmohsystem.com/web/login';
+                              } else if (childSlug === 'dhis2') {
+                                path = 'https://hmis.moh.gov.so/dhis-web-commons/security/login.action';
+                              }
+
+                              const isExternal = path.startsWith('http');
+
                               return (
                                 <li key={child._id}>
-                                  <Link
-                                    to={path}
-                                    target={isPortal ? '_blank' : undefined}
-                                    rel={isPortal ? 'noopener noreferrer' : undefined}
-                                    className="block px-4 py-2 text-xs md:text-sm text-gray-700 hover:bg-gray-100"
-                                  >
-                                    {child.name}
-                                  </Link>
+                                  {isExternal ? (
+                                    <a
+                                      href={path}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="block px-4 py-2 text-xs md:text-sm text-gray-700 hover:bg-gray-100"
+                                    >
+                                      {child.name}
+                                    </a>
+                                  ) : (
+                                    <Link
+                                      to={path}
+                                      target={isPortal ? '_blank' : undefined}
+                                      rel={isPortal ? 'noopener noreferrer' : undefined}
+                                      className="block px-4 py-2 text-xs md:text-sm text-gray-700 hover:bg-gray-100"
+                                    >
+                                      {child.name}
+                                    </Link>
+                                  )}
                                 </li>
                               );
                             })}
