@@ -17,7 +17,7 @@ const UnderConstructionPage = () => {
         <img src={mohLogo} alt="Ministry of Health Logo" className="h-24 w-auto mx-auto mb-6" />
         <h1 className="text-5xl font-extrabold text-blue-600 mb-4">Under Construction</h1>
         <p className="text-lg mb-8">
-          We are working hard to bring you an amazing new portal: <strong>{systemName}</strong>. Please check back soon!
+          We are currently developing the <strong>{systemName}</strong>. Please check back soon!
         </p>
         <Link 
           to="/" 
