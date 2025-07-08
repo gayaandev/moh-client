@@ -21,6 +21,7 @@ import DepartmentPublicHealthPage from './components/public/pages/Departments/De
 import DepartmentMentalHealthPage from './components/public/pages/Departments/DepartmentMentalHealthPage'; // Import DepartmentMentalHealthPage
 import DamalCaafimadPage from './components/public/pages/Departments/projects/DamalCaafimadPage';
 import MarwoCaafimaadPage from './components/public/pages/Departments/projects/MarwoCaafimaadPage';
+import UnderConstructionPage from './components/public/pages/Portal/UnderConstructionPage';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext'; // Import AuthProvider and useAuth
 import PublicLayout from './components/public/components/PublicLayout';
@@ -61,6 +62,11 @@ function App() {
             <Route path="/mental-health-department" element={<PublicLayout><DepartmentMentalHealthPage /></PublicLayout>} />
             <Route path="/damal-caafimaad" element={<PublicLayout><DamalCaafimadPage /></PublicLayout>} />
             <Route path="/marwo-caafimaad" element={<PublicLayout><MarwoCaafimaadPage /></PublicLayout>} />
+            
+            {/* Portal Routes */}
+            <Route path="/asset-register-system" element={<UnderConstructionPage />} />
+            <Route path="/health-facility-registration-system" element={<UnderConstructionPage />} />
+            <Route path="/health-professional-registry-system" element={<UnderConstructionPage />} />
             {/* Add other public routes here */}
 
             {/* Admin Login Route */}

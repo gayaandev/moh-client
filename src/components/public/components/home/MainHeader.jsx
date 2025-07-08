@@ -256,13 +256,31 @@ const MainHeader = () => {
                       {item.children.length > 0 && (
                         <div className="absolute left-0 mt-1 w-max rounded-md shadow-lg bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 text-left">
                           <ul className="py-1">
-                            {item.children.map((child) => (
-                              <li key={child._id}>
-                                <Link to={child.name.toLowerCase().includes('kmti') ? '/kmti' : `/${generateSlug(child.name)}`} className="block px-4 py-2 text-xs md:text-sm text-gray-700 hover:bg-gray-100">
-                                  {child.name}
-                                </Link>
-                              </li>
-                            ))}
+                            {item.children.map((child) => {
+                              const childSlug = generateSlug(child.name);
+                              const isPortal = [
+                                'asset-register-system',
+                                'health-facility-registration-system',
+                                'health-professional-registry-system'
+                              ].includes(childSlug);
+
+                              const path = child.name.toLowerCase().includes('kmti')
+                                ? '/kmti'
+                                : `/${childSlug}`;
+
+                              return (
+                                <li key={child._id}>
+                                  <Link
+                                    to={path}
+                                    target={isPortal ? '_blank' : undefined}
+                                    rel={isPortal ? 'noopener noreferrer' : undefined}
+                                    className="block px-4 py-2 text-xs md:text-sm text-gray-700 hover:bg-gray-100"
+                                  >
+                                    {child.name}
+                                  </Link>
+                                </li>
+                              );
+                            })}
                           </ul>
                         </div>
                       )}
