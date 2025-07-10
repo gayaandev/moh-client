@@ -13,6 +13,7 @@ import ContactPage from './components/public/pages/Contact/ContactPage'; // Impo
 import KMTIPage from './components/public/pages/KMTI/KMTIPage'; // Import KMTIPage
 import OverviewPage from './components/public/pages/About/OverviewPage'; // Import OverviewPage
 import OrganogramPage from './components/public/pages/About/OrganogramPage'; // Import OrganogramPage
+import MissionAndVisionPage from './components/public/pages/About/MissionAndVisionPage'; // Import MissionAndVisionPage
 import DepartmentAdminFinanceHRPage from './components/public/pages/Departments/DepartmentAdminFinanceHRPage'; // Import DepartmentAdminFinanceHRPage
 import DepartmentMedicalServicePage from './components/public/pages/Departments/DepartmentMedicalServicePage'; // Import DepartmentMedicalServicePage
 import DepartmentHealthEmergencyPage from './components/public/pages/Departments/DepartmentHealthEmergencyPage'; // Import DepartmentHealthEmergencyPage
@@ -54,6 +55,7 @@ function App() {
             <Route path="/kmti" element={<PublicLayout><KMTIPage /></PublicLayout>} />
             <Route path="/overview" element={<PublicLayout><OverviewPage /></PublicLayout>} />
             <Route path="/organogram" element={<PublicLayout><OrganogramPage /></PublicLayout>} />
+            <Route path="/vision-and-mission" element={<PublicLayout><MissionAndVisionPage /></PublicLayout>} />
             <Route path="/admin-finance-and-human-resource-department" element={<PublicLayout><DepartmentAdminFinanceHRPage /></PublicLayout>} />
             <Route path="/medical-service-department" element={<PublicLayout><DepartmentMedicalServicePage /></PublicLayout>} />
             <Route path="/health-emergency-department" element={<PublicLayout><DepartmentHealthEmergencyPage /></PublicLayout>} />
