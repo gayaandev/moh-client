@@ -23,6 +23,7 @@ import DepartmentMentalHealthPage from './components/public/pages/Departments/De
 import DamalCaafimadPage from './components/public/pages/Departments/projects/DamalCaafimadPage';
 import MarwoCaafimaadPage from './components/public/pages/Departments/projects/MarwoCaafimaadPage';
 import UnderConstructionPage from './components/public/pages/Portal/UnderConstructionPage';
+import ReportsPage from './components/public/pages/Reports/ReportsPage';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext'; // Import AuthProvider and useAuth
 import PublicLayout from './components/public/components/PublicLayout';
@@ -64,6 +65,7 @@ function App() {
             <Route path="/mental-health-department" element={<PublicLayout><DepartmentMentalHealthPage /></PublicLayout>} />
             <Route path="/damal-caafimaad" element={<PublicLayout><DamalCaafimadPage /></PublicLayout>} />
             <Route path="/marwo-caafimaad" element={<PublicLayout><MarwoCaafimaadPage /></PublicLayout>} />
+            <Route path="/reports" element={<PublicLayout><ReportsPage /></PublicLayout>} />
             
             {/* Portal Routes */}
             <Route path="/asset-register-system" element={<UnderConstructionPage />} />
