@@ -24,6 +24,7 @@ import DamalCaafimadPage from './components/public/pages/Departments/projects/Da
 import MarwoCaafimaadPage from './components/public/pages/Departments/projects/MarwoCaafimaadPage';
 import UnderConstructionPage from './components/public/pages/Portal/UnderConstructionPage';
 import ReportsPage from './components/public/pages/Reports/ReportsPage';
+import PolicyPage from './components/public/pages/Policy/PolicyPage';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext'; // Import AuthProvider and useAuth
 import PublicLayout from './components/public/components/PublicLayout';
@@ -66,6 +67,7 @@ function App() {
             <Route path="/damal-caafimaad" element={<PublicLayout><DamalCaafimadPage /></PublicLayout>} />
             <Route path="/marwo-caafimaad" element={<PublicLayout><MarwoCaafimaadPage /></PublicLayout>} />
             <Route path="/reports" element={<PublicLayout><ReportsPage /></PublicLayout>} />
+            <Route path="/policy" element={<PublicLayout><PolicyPage /></PublicLayout>} />
             
             {/* Portal Routes */}
             <Route path="/asset-register-system" element={<UnderConstructionPage />} />
