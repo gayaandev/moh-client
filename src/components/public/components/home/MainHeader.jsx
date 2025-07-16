@@ -263,7 +263,8 @@ const MainHeader = () => {
                                 'health-facility-registration-system',
                                 'health-professional-registry-system',
                                 'ihrm-software',
-                                'dhis2'
+                                'dhis2',
+                                'moh-employee-leave'
                               ].includes(childSlug);
 
                               let path = child.name.toLowerCase().includes('kmti')
@@ -274,6 +275,8 @@ const MainHeader = () => {
                                 path = 'https://jsmohsystem.com/web/login';
                               } else if (childSlug === 'dhis2') {
                                 path = 'https://hmis.moh.gov.so/dhis-web-commons/security/login.action';
+                              } else if (childSlug === 'moh-employee-leave') {
+                                path = 'https://leave.sahansoft.com/';
                               }
 
                               const isExternal = path.startsWith('http');
