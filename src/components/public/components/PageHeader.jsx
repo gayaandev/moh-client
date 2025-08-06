@@ -257,6 +257,9 @@ const PageHeader = ({ pageName }) => {
                               if (childSlug === 'mental-health-department') {
                                 return null; // Do not render the "Mental Health Department" child link
                               }
+                              if (childSlug === 'planning-policy-and-coordination-department') {
+                                return null; // Do not render the "Planning Policy and Coordination Department" child link
+                              }
                               const isPortal = [
                                 'asset-register-system',
                                 'health-facility-registration-system',

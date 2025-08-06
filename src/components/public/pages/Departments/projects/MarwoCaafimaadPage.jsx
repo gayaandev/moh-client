@@ -19,7 +19,7 @@ const MarwoCaafimaadPage = () => {
             </p>
           </div>
           <div>
-            <img src="https://moh-assets.nyc3.cdn.digitaloceanspaces.com/77c44a9c-290e-4114-a1f2-647b3c74715c.jpeg" alt="Marwo Caafimaad Project Image" className="rounded-lg shadow-lg" />
+            <img src="https://moh-assets.nyc3.cdn.digitaloceanspaces.com/db1c4704-5a71-4022-85c9-19f78db12b5d.jpeg" alt="Marwo Caafimaad Project Image" className="rounded-lg shadow-lg" />
             <div className="text-center mt-4">
               <p className="text-2xl font-bold">Abdirahman Ibrahim</p>
               <p className="text-xl text-gray-600">Project Manager</p>
