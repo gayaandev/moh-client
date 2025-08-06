@@ -19,7 +19,7 @@ import DepartmentMedicalServicePage from './components/public/pages/Departments/
 import DepartmentHealthEmergencyPage from './components/public/pages/Departments/DepartmentHealthEmergencyPage'; // Import DepartmentHealthEmergencyPage
 import DepartmentFamilyHealthPage from './components/public/pages/Departments/DepartmentFamilyHealthPage'; // Import DepartmentFamilyHealthPage
 import DepartmentPublicHealthPage from './components/public/pages/Departments/DepartmentPublicHealthPage'; // Import DepartmentPublicHealthPage
-import DepartmentMentalHealthPage from './components/public/pages/Departments/DepartmentMentalHealthPage'; // Import DepartmentMentalHealthPage
+// import DepartmentMentalHealthPage from './components/public/pages/Departments/DepartmentMentalHealthPage'; // Import DepartmentMentalHealthPage
 import DamalCaafimadPage from './components/public/pages/Departments/projects/DamalCaafimadPage';
 import MarwoCaafimaadPage from './components/public/pages/Departments/projects/MarwoCaafimaadPage';
 import UnderConstructionPage from './components/public/pages/Portal/UnderConstructionPage';
@@ -63,7 +63,7 @@ function App() {
             <Route path="/health-emergency-department" element={<PublicLayout><DepartmentHealthEmergencyPage /></PublicLayout>} />
             <Route path="/family-health-department" element={<PublicLayout><DepartmentFamilyHealthPage /></PublicLayout>} />
             <Route path="/public-health-department" element={<PublicLayout><DepartmentPublicHealthPage /></PublicLayout>} />
-            <Route path="/mental-health-department" element={<PublicLayout><DepartmentMentalHealthPage /></PublicLayout>} />
+            {/* <Route path="/mental-health-department" element={<PublicLayout><DepartmentMentalHealthPage /></PublicLayout>} /> */}
             <Route path="/damal-caafimaad" element={<PublicLayout><DamalCaafimadPage /></PublicLayout>} />
             <Route path="/marwo-caafimaad" element={<PublicLayout><MarwoCaafimaadPage /></PublicLayout>} />
             <Route path="/reports" element={<PublicLayout><ReportsPage /></PublicLayout>} />

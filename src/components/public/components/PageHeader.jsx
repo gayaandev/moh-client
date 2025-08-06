@@ -202,8 +202,8 @@ const PageHeader = ({ pageName }) => {
                   const isActive = location.pathname === itemPath;
 
                   // Conditionally render based on item name
-                  if (item.name.toLowerCase() === 'home') {
-                    return null; // Do not render the "Home" link
+                  if (item.name.toLowerCase() === 'home' || generateSlug(item.name) === 'mental-health-department') {
+                    return null; // Do not render the "Home" or "Mental Health Department" link
                   }
 
                   return (
@@ -254,6 +254,9 @@ const PageHeader = ({ pageName }) => {
                           <ul className="py-1">
                             {item.children.map((child) => {
                               const childSlug = generateSlug(child.name);
+                              if (childSlug === 'mental-health-department') {
+                                return null; // Do not render the "Mental Health Department" child link
+                              }
                               const isPortal = [
                                 'asset-register-system',
                                 'health-facility-registration-system',
