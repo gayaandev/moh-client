@@ -266,7 +266,8 @@ const PageHeader = ({ pageName }) => {
                                 'health-professional-registry-system',
                                 'ihrm-software',
                                 'dhis2',
-                                'moh-employee-leave'
+                                'moh-employee-leave',
+                                'supply-chain-management-system'
                               ].includes(childSlug);
 
                               let path = child.name.toLowerCase().includes('kmti')
@@ -279,6 +280,8 @@ const PageHeader = ({ pageName }) => {
                                 path = 'https://hmis.moh.gov.so/dhis-web-commons/security/login.action';
                               } else if (childSlug === 'moh-employee-leave') {
                                 path = 'https://leave.sahansoft.com/';
+                              } else if (childSlug === 'supply-chain-management-system') {
+                                path = 'https://scms.mohjubalandstate.so/';
                               }
 
                               const isExternal = path.startsWith('http');
